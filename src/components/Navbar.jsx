@@ -5,7 +5,7 @@ import {
 	FaGear,
 	FaMagnifyingGlass,
 } from 'react-icons/fa6';
-import './Navbar.css';
+import './styles.css';
 
 function Navbar() {
 	const menuLinks = [
@@ -19,7 +19,11 @@ function Navbar() {
 		<nav className='nav'>
 			<ul className='menu'>
 				{menuLinks.map((link) => {
-					return <li key={link}>{link}</li>;
+					return (
+						<li key={link}>
+							<a href='#'>{link}</a>
+						</li>
+					);
 				})}
 			</ul>
 		</nav>
