@@ -1,4 +1,4 @@
-import './Posts.css';
+import './styles.css';
 import { FaRegThumbsUp } from 'react-icons/fa6';
 const posts = [
 	{ title: 'New Post!', body: 'blah blah blah blah blah blah' },
@@ -7,29 +7,19 @@ const posts = [
 ];
 function Posts() {
 	return (
-		<>
-			<div className='sortAndFilter'>
-				<label>
-					<select className='sort'>
-						<option>Recent</option>
-						<option>Popular</option>
-					</select>
-				</label>
-			</div>
-			<div className='board'>
-				{posts.map((post) => {
-					return (
-						<div className='post'>
-							<div className='postInfo'>
-								<h2>{post.title}</h2>
-								<p>{post.body}</p>
-							</div>
-							<FaRegThumbsUp className='thumbsUp' />
+		<div className='board'>
+			{posts.map((post) => {
+				return (
+					<div className='post' key={posts[i]}>
+						<div className='postInfo'>
+							<h2>{post.title}</h2>
+							<p>{post.body}</p>
 						</div>
-					);
-				})}
-			</div>
-		</>
+						<FaRegThumbsUp className='thumbsUp' />
+					</div>
+				);
+			})}
+		</div>
 	);
 }
 
