@@ -10,7 +10,7 @@ function Posts() {
 		<div className='board'>
 			{posts.map((post) => {
 				return (
-					<div className='post' key={posts[i]}>
+					<div className='post' key={posts[post]}>
 						<div className='postInfo'>
 							<h2>{post.title}</h2>
 							<p>{post.body}</p>

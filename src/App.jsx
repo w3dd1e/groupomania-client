@@ -4,7 +4,6 @@ import Posts from './components/Posts';
 import ProfileIcon from './components/ProfileLink';
 import Filter from './components/Filter';
 import './App.css';
-const listOptions = [Recent, Popular];
 
 function App() {
 	return (
