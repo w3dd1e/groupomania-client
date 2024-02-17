@@ -1,34 +1,37 @@
+import { Link } from "react-router-dom";
 import "./auth.css";
-import Navbar from "../Navbar/Navbar";
-import ProfileIcon from "../Titlebar/ProfileLink";
 
-function Login() {
+function LoginForm() {
   return (
-    <>
-      <div className='login'>
-        <h1>GroupBoards</h1>
-        <h2>by Groupomania</h2>
-        <div className='loginForm'>
-          <form>
-            <label>
-              Username: <input type='text'></input>
-            </label>
-            <br />
-
-            <label>
-              Password: <input type='text'></input>
-            </label>
-            <br />
-            <button>Login</button>
-          </form>
-          <p>
-            <a href='#'>Sign Up</a>
-          </p>
+    <div className='login'>
+      <form className='loginForm' id='login'>
+        <div className='inputContainer'>
+          <label for='email'>Email:</label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            aria-label='email'
+          ></input>
         </div>
-      </div>
-      <Navbar />
-    </>
+        <div className='inputContainer'>
+          <label for='password'>Password:</label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            aria-label='password'
+          ></input>
+        </div>
+        <div className='buttonContainer'>
+          <div>
+            <a href='#'>Sign Up</a>
+          </div>
+          <input type='submit' value='Sign In' className='button'></input>
+        </div>
+      </form>
+    </div>
   );
 }
 
-export default Login;
+export default LoginForm;

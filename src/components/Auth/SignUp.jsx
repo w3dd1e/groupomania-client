@@ -1,34 +1,45 @@
+import { Link } from "react-router-dom";
 import "./auth.css";
-import Navbar from "./Navbar";
 
 function SignUp() {
   return (
-    <>
-      <div className='signup'>
-        <h1>GroupBoards</h1>
-        <h2>by Groupomania</h2>
-        <div className='signUpForm'>
-          <form>
-            <label>
-              Username: <input type='text'></input>
-            </label>
-            <br />
-            <label>
-              Email: <input type='text'></input>
-            </label>
-            <br />
-            <label>
-              Password: <input type='text'></input>
-            </label>
-            <br />
-
-            <button>Sign Up</button>
-          </form>
+    <div className='signup'>
+      <form className='signUpForm' id='signUp'>
+        <div className='inputContainer'>
+          <label for='username'>Username:</label>
+          <input
+            type='text'
+            id='username'
+            name='username'
+            aria-label='username'
+          ></input>
         </div>
-      </div>
-      <Navbar />
-    </>
+        <div className='inputContainer'>
+          <label for='email'>Email:</label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            aria-label='email'
+          ></input>
+        </div>
+        <div className='inputContainer'>
+          <label for='password'>Password:</label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            aria-label='password'
+          ></input>
+        </div>
+        <div className='buttonContainer'>
+          <div>
+            <a href='#'>Sign In</a>
+          </div>
+          <input type='submit' value='Sign Up' className='button'></input>
+        </div>
+      </form>
+    </div>
   );
 }
-
 export default SignUp;
