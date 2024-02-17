@@ -1,0 +1,37 @@
+.profile {
+  margin: 0rem;
+  line-height: -2.75rem;
+  & h0 {
+    font-size: 0rem;
+  }
+}
+
+.settings {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 75%;
+  & h2 {
+    margin: 0;
+  }
+  & ul {
+    padding-left: 0.75rem;
+    list-style-type: none;
+    line-height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+
+    & li {
+      margin: 0.5rem;
+    }
+  }
+}
+
+.delete {
+  margin-top: auto;
+  align-self: center;
+  & a {
+    color: crimson;
+  }
+}

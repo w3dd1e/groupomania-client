@@ -9,3 +9,14 @@
   object-fit: cover;
   border-radius: 0.75rem;
 }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+
+  & h1 {
+    font-size: 1.5rem;
+  }
+}
