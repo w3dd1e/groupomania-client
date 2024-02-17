@@ -11,3 +11,10 @@
   gap: 2rem;
   margin-top: auto;
 }
+
+#error-page {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+}
