@@ -1,0 +1,11 @@
+.sortAndFilter {
+  margin: 0.25rem 1rem;
+  text-align: right;
+}
+
+.profileIcon {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}

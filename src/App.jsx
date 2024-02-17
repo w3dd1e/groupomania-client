@@ -1,22 +1,15 @@
-import { useState } from 'react';
-import Navbar from './components/Navbar';
-import Posts from './components/Posts';
-import ProfileIcon from './components/ProfileLink';
-import Filter from './components/Filter';
-import './App.css';
+import Navbar from "./components/Navbar/Navbar";
+import Login from "./components/Auth/Login";
+
+import "./App.css";
 
 function App() {
-	return (
-		<>
-			<div className='toolbar'>
-				<ProfileIcon />
-				<h1>GroupBoards</h1>
-				<Filter />
-			</div>
-			<Posts />
-			<Navbar />
-		</>
-	);
+  return (
+    <>
+      <Login />
+      <Navbar />
+    </>
+  );
 }
 
 export default App;
