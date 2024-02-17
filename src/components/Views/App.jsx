@@ -1,12 +1,16 @@
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./components/Auth/Login";
+import Navbar from "../Navbar/Navbar";
+import LoginForm from "../Auth/Login";
+import Title from "../Titlebar/Title";
 
 import "./App.css";
 
 function App() {
   return (
     <>
-      <Login />
+      <div className='content'>
+        <Title />
+        <LoginForm />
+      </div>
       <Navbar />
     </>
   );
