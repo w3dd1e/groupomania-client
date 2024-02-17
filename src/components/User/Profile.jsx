@@ -1,5 +1,4 @@
-import Navbar from "./Navbar";
-import ProfileIcon from "./ProfileLink";
+import ProfileIcon from "../Titlebar/ProfileLink";
 import Posts from "../Feed/Posts";
 import "./user.css";
 
@@ -26,8 +25,6 @@ function Profile() {
         <p>About Me: {user.about}</p>
       </div>
       <Posts />
-
-      <Navbar />
     </>
   );
 }

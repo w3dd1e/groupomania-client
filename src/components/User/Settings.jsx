@@ -1,5 +1,4 @@
-import Navbar from "./Navbar";
-import ProfileIcon from "./ProfileLink";
+import ProfileIcon from "../Titlebar/ProfileLink";
 import "./user.css";
 
 function Settings() {
@@ -30,7 +29,6 @@ function Settings() {
           <a href='#'>Delete Account</a>
         </p>
       </div>
-      <Navbar />
     </>
   );
 }

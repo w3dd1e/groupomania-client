@@ -1,8 +1,7 @@
 import "./search.css";
 import { FaRegThumbsUp, FaMagnifyingGlass } from "react-icons/fa6";
-import Navbar from "./Navbar";
-import ProfileIcon from "./ProfileLink";
-import Filter from "./Filter";
+import ProfileIcon from "../Titlebar/ProfileLink";
+import Filter from "../Titlebar/Filter";
 
 const posts = [
   { title: "New Post!", body: "blah blah blah blah blah blah" },
@@ -37,7 +36,6 @@ function Inbox() {
           );
         })}
       </div>
-      <Navbar />
     </>
   );
 }
