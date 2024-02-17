@@ -1,4 +1,4 @@
-import "../App.css";
+import "./auth.css";
 import Navbar from "../Navbar/Navbar";
 import ProfileIcon from "../Titlebar/ProfileLink";
 

@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import ProfileIcon from "./ProfileLink";
 import Posts from "../Feed/Posts";
-import "../App.css";
+import "./user.css";
 
 const user = {
   name: "Kelly Weddle",
