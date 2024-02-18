@@ -1,5 +1,5 @@
-import Posts from "../Posts/Posts";
-import ToolBar from "../ToolBar/ToolBar";
+import Posts from "../components/Posts/Posts";
+import ToolBar from "../components/ToolBar/ToolBar";
 
 function LoginPage() {
   return (

@@ -25,7 +25,7 @@ function LoginForm() {
         </div>
         <div className='buttonContainer'>
           <div>
-            <a href='#'>Sign Up</a>
+            <Link to='signup'>Sign Up</Link>
           </div>
           <input type='submit' value='Sign In' className='button'></input>
         </div>

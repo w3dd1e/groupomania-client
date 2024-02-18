@@ -1,4 +1,4 @@
-import "../Views/App.css";
+import "../../views/app.css";
 import Posts from "../Posts/Posts";
 import Titlebar from "../ToolBar/ToolBar";
 

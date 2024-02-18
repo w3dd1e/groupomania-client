@@ -1,5 +1,5 @@
-import LoginForm from "../Auth/Login";
-import Title from "../ToolBar/Title";
+import LoginForm from "../components/Auth/Login";
+import Title from "../components/ToolBar/Title";
 
 function LoginPage() {
   return (
