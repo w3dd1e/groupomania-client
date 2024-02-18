@@ -1,5 +1,5 @@
 import "../Views/App.css";
-import Posts from "../Feed/Posts";
+import Posts from "../Posts/Posts";
 import Titlebar from "../ToolBar/ToolBar";
 
 function Inbox() {

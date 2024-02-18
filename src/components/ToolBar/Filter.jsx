@@ -1,4 +1,4 @@
-import "./titlebar.css";
+import "./toolbar.css";
 
 const listOptions = ["Recent", "Popular"];
 function Filter() {

@@ -1,4 +1,4 @@
-import "./titlebar.css";
+import "./toolbar.css";
 
 const user = { user: "username", image: "../src/assets/Ducky.jpeg" };
 const userImage = user.image;

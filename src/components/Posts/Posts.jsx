@@ -1,4 +1,4 @@
-import "./feed.css";
+import "./posts.css";
 import { FaRegThumbsUp } from "react-icons/fa6";
 const posts = [
   { title: "New Post!", body: "blah blah blah blah blah blah" },

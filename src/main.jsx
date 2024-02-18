@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./components/Views/App";
 import LoginPage from "./components/Views/LoginPage";
-import Posts from "./components/Feed/Posts";
+import Posts from "./components/Posts/Posts";
 import Profile from "./components/User/Profile";
 import Inbox from "./components/Inbox/Inbox";
 import Search from "./components/Search/Search";

@@ -1,5 +1,5 @@
 import ProfileIcon from "../ToolBar/ProfileLink";
-import Posts from "../Feed/Posts";
+import Posts from "../Posts/Posts";
 import "./user.css";
 
 const user = {
