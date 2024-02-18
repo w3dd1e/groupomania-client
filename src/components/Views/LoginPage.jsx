@@ -1,12 +1,12 @@
 import LoginForm from "../Auth/Login";
-import Title from "../Titlebar/Title";
+import Title from "../ToolBar/Title";
 
 function LoginPage() {
   return (
-    <>
+    <div className='loginPage'>
       <Title />
       <LoginForm />
-    </>
+    </div>
   );
 }
 
