@@ -1,28 +1,29 @@
 .board {
-  & h2 {
-    text-align: center;
-    margin: 0;
-    font-size: 1.4rem;
-  }
-}
-.board {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0 1rem;
   text-align: left;
 }
 
 .thumbsUp {
   font-size: 1rem;
+  margin: 0.25rem;
 }
 
 .post {
   display: flex;
   align-items: center;
+  border: solid 1px black;
+  padding: 0.5rem;
+}
 
-  .postInfo {
-    flex: 1;
-  }
+.postInfo {
+  flex: 1;
+}
+.postTitle {
+  text-align: left;
+}
+
+.postPreview {
+  margin: 0;
 }
