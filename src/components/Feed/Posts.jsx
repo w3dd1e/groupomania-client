@@ -4,6 +4,12 @@ const posts = [
   { title: "New Post!", body: "blah blah blah blah blah blah" },
   { title: "New Post!", body: "blah blah blah blah blah blah" },
   { title: "New Post!", body: "blah blah blah blah blah blah" },
+  { title: "New Post!", body: "blah blah blah blah blah blah" },
+  { title: "New Post!", body: "blah blah blah blah blah blah" },
+  { title: "New Post!", body: "blah blah blah blah blah blah" },
+  { title: "New Post!", body: "blah blah blah blah blah blah" },
+  { title: "New Post!", body: "blah blah blah blah blah blah" },
+  { title: "New Post!", body: "blah blah blah blah blah blah" },
 ];
 function Posts() {
   return (
@@ -12,8 +18,8 @@ function Posts() {
         return (
           <div className='post' key={posts[post]}>
             <div className='postInfo'>
-              <h2>{post.title}</h2>
-              <p>{post.body}</p>
+              <h2 className='postTitle'>{post.title}</h2>
+              <p className='postPreview'>{post.body}</p>
             </div>
             <FaRegThumbsUp className='thumbsUp' />
           </div>
