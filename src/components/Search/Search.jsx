@@ -1,7 +1,7 @@
 import "./search.css";
 import { FaRegThumbsUp, FaMagnifyingGlass } from "react-icons/fa6";
-import ProfileIcon from "../Titlebar/ProfileLink";
-import Filter from "../Titlebar/Filter";
+import ProfileIcon from "../ToolBar/ProfileLink";
+import Filter from "../ToolBar/Filter";
 
 const posts = [
   { title: "New Post!", body: "blah blah blah blah blah blah" },

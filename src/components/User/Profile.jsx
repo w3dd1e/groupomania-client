@@ -1,4 +1,4 @@
-import ProfileIcon from "../Titlebar/ProfileLink";
+import ProfileIcon from "../ToolBar/ProfileLink";
 import Posts from "../Feed/Posts";
 import "./user.css";
 
