@@ -1,13 +1,12 @@
-import "../../views/app.css";
-import Posts from "../Posts/Posts";
-import Titlebar from "../ToolBar/ToolBar";
+import { Link } from "react-router-dom";
+import "./inbox.css";
 
 function Inbox() {
   return (
-    <>
-      <Titlebar />
-      <Posts />
-    </>
+    <div className='inboxContainer'>
+      <Link to='unread'>Unread</Link>
+      <Link to='read'>Read</Link>
+    </div>
   );
 }
 
