@@ -34,7 +34,7 @@ function SignUp() {
         </div>
         <div className='buttonContainer'>
           <div>
-            <Link to='login'>Sign In</Link>
+            <Link to='/login'>Sign In</Link>
           </div>
           <input type='submit' value='Sign Up' className='button'></input>
         </div>
