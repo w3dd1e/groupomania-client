@@ -5,7 +5,13 @@ function Search() {
   return (
     <div className='searchContainer'>
       <form className='search'>
-        <input type='search' aria-label='search' id='search' name='q'></input>
+        <input
+          type='search'
+          aria-label='search'
+          id='search'
+          name='q'
+          placeholder='Search'
+        ></input>
         <button type='submit' className='searchButton'>
           <FaMagnifyingGlass className='searchIcon' />
         </button>
