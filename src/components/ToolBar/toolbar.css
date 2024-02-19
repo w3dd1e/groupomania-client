@@ -15,12 +15,14 @@ h2 {
   text-align: right;
 }
 
+.imageContainer {
+  line-height: 0;
+}
 .profileIcon {
   width: 3rem;
   height: 3rem;
   object-fit: cover;
   border-radius: 0.75rem;
-  margin: 0.25rem;
 }
 
 .toolbar {
@@ -36,8 +38,4 @@ h2 {
   h2 {
     font-size: 0.75rem;
   }
-}
-
-.title {
-  margin-top: 1rem;
 }
