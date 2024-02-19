@@ -5,7 +5,7 @@ const userImage = user.image;
 
 function ProfileIcon() {
   return (
-    <div>
+    <div className='imageContainer'>
       <img src={userImage} className='profileIcon' />
     </div>
   );
