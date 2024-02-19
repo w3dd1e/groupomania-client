@@ -12,7 +12,7 @@ function Navbar() {
   const menuLinks = [
     { link: "feed", icon: <FaTableList /> },
     { link: "profile", icon: <FaUser /> },
-    { link: "messages", icon: <FaRegMessage /> },
+    { link: "inbox", icon: <FaRegMessage /> },
     { link: "search", icon: <FaMagnifyingGlass /> },
     { link: "settings", icon: <FaGear /> },
   ];
