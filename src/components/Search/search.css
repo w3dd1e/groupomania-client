@@ -1,5 +1,17 @@
-.search {
-  display: flex;
-  justify-content: center;
-  margin: 1rem;
+.searchContainer {
+  margin: auto;
+}
+#search {
+  font-size: 1rem;
+  line-height: 2rem;
+  position: relative;
+  z-index: 10;
+  border: 1px solid #1a1a1a;
+}
+.searchButton {
+  padding: 1px 1rem 1px 21px;
+  position: relative;
+  right: 6px;
+  line-height: 2rem;
+  border: 1px solid #1a1a1a;
 }
