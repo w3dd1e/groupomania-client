@@ -1,6 +1,6 @@
 import Filter from "./Filter";
 import Title from "./Title";
-import ProfileIcon from "./ProfileLink";
+import ProfileIcon from "./ProfileIcon";
 
 function Titlebar() {
   return (
