@@ -1,14 +1,15 @@
-import "./app.css";
+import Inbox from "../components/Inbox/Inbox";
 import Posts from "../components/Posts/Posts";
 import ToolBar from "../components/ToolBar/ToolBar";
 
-function Inbox() {
+function InboxPage() {
   return (
     <>
       <ToolBar />
+      <Inbox />
       <Posts />
     </>
   );
 }
 
-export default Inbox;
+export default InboxPage;
