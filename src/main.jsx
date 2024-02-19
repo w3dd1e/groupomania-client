@@ -5,8 +5,8 @@ import App from "./views/App";
 import LoginPage from "./views/LoginPage";
 import SignUpPage from "./views/SignUpPage";
 import Feed from "./views/Feed";
-import Profile from "./components/User/Profile";
-import Inbox from "./components/Inbox/Inbox";
+import ProfilePage from "./views/ProfilePage";
+import InboxPage from "./views/InboxPage";
 import Search from "./components/Search/Search";
 import Settings from "./components/User/Settings";
 import ErrorPage from "./views/ErrorPage";
@@ -40,11 +40,11 @@ const router = createBrowserRouter([
           },
           {
             path: "profile",
-            element: <Profile />,
+            element: <ProfilePage />,
           },
           {
             path: "messages",
-            element: <Inbox />,
+            element: <InboxPage />,
           },
           {
             path: "search",
