@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./views/App";
 import LoginPage from "./views/LoginPage";
+import SignUpPage from "./views/SignUpPage";
 import Feed from "./views/Feed";
 import Profile from "./components/User/Profile";
 import Inbox from "./components/Inbox/Inbox";
@@ -11,6 +12,7 @@ import Settings from "./components/User/Settings";
 import ErrorPage from "./views/ErrorPage";
 
 import "./index.css";
+import SignUp from "./components/Auth/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
           {
             path: "login",
             element: <LoginPage />,
+          },
+          {
+            path: "signup",
+            element: <SignUpPage />,
           },
           {
             path: "feed",
