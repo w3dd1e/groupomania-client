@@ -1,43 +1,17 @@
 import "./search.css";
-import { FaRegThumbsUp, FaMagnifyingGlass } from "react-icons/fa6";
-import ProfileIcon from "../ToolBar/ProfileLink";
-import Filter from "../ToolBar/Filter";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
-const posts = [
-  { title: "New Post!", body: "blah blah blah blah blah blah" },
-  { title: "New Post!", body: "blah blah blah blah blah blah" },
-  { title: "New Post!", body: "blah blah blah blah blah blah" },
-];
-
-function Inbox() {
+function Search() {
   return (
-    <>
-      <div className='toolbar'>
-        <ProfileIcon />
-        <h1>GroupBoards</h1>
-        <Filter />
-      </div>
-      <div className='board'>
-        <form className='search'>
-          <input></input>
-          <button>
-            <FaMagnifyingGlass />
-          </button>{" "}
-        </form>
-        {posts.map((post) => {
-          return (
-            <div className='post' key={post}>
-              <div className='postInfo'>
-                <h3>{post.title}</h3>
-                <p>{post.body}</p>
-              </div>
-              <FaRegThumbsUp className='thumbsUp' />
-            </div>
-          );
-        })}
-      </div>
-    </>
+    <div className='searchContainer'>
+      <form className='search'>
+        <input type='search' aria-label='search' id='search' name='q'></input>
+        <button type='submit' className='searchButton'>
+          <FaMagnifyingGlass className='searchIcon' />
+        </button>
+      </form>
+    </div>
   );
 }
 
-export default Inbox;
+export default Search;
