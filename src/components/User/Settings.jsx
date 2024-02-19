@@ -1,4 +1,4 @@
-import ProfileIcon from "../ToolBar/ProfileLink";
+import ProfileIcon from "../ToolBar/ProfileIcon";
 import "./user.css";
 
 function Settings() {
