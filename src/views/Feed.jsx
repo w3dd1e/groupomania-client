@@ -1,4 +1,4 @@
-import Posts from "../components/Posts/Posts";
+import Posts, { getPosts } from "../components/Posts/Posts";
 import ToolBar from "../components/ToolBar/ToolBar";
 
 function LoginPage() {
