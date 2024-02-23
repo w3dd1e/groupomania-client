@@ -1,7 +1,12 @@
 import Posts, { getPosts } from "../components/Posts/Posts";
 import ToolBar from "../components/ToolBar/ToolBar";
 
-function LoginPage() {
+export async function loader() {
+  const posts = await getPosts();
+  return { posts };
+}
+
+function Feed() {
   return (
     <div className='feed'>
       <ToolBar />
@@ -10,4 +15,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Feed;
