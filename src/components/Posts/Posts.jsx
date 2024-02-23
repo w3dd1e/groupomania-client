@@ -7,18 +7,13 @@ import sortBy from "sort-by";
 import "./posts.css";
 
 const postsURL = "http://localhost:3000/posts";
-let posts = [];
-let data = [];
 
 export async function getPosts() {
-  try {
-    let response = await fetch(postsURL);
-    posts = await response.json();
-    console.log("Data fetched from database!");
-    return posts;
-  } catch (error) {
-    console.log("Error:", error);
-  }
+  let response = await fetch(postsURL);
+
+  //posts = await response.json();
+  console.log("Data fetched from database!");
+  return response;
 }
 
 function Posts() {
