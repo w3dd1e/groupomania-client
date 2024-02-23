@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./views/App";
 import LoginPage from "./views/LoginPage";
 import SignUpPage from "./views/SignUpPage";
-import Feed from "./views/Feed";
+import Feed, { loader as feedLoader } from "./views/Feed";
 import ProfilePage from "./views/ProfilePage";
 import InboxPage from "./views/InboxPage";
 import SearchPage from "./views/SearchPage";
@@ -37,6 +37,7 @@ const router = createBrowserRouter([
           {
             path: "feed",
             element: <Feed />,
+            loader: feedLoader,
           },
           {
             path: "profile",
