@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useLoaderData } from "react-router-dom";
 
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { matchSorter } from "match-sorter";
@@ -22,20 +22,11 @@ export async function getPosts() {
 }
 
 function Posts() {
-  const { data, error, isPending, isError } = useQuery({
-    queryKey: ["posts"],
-    queryFn: getPosts,
-  });
-  if (isPending) {
-    return <div>Fetching posts...</div>;
-  } else if (isError) {
-    return <div>An error occurred: {error.message}</div>;
-  } else {
-    console.log("Posts queried!");
-  }
-  return (
+  const { posts } = useLoaderData();
+
+  return posts.length ? (
     <div className='board'>
-      {data.map((post) => {
+      {posts.map((post) => {
         return (
           <div className='post' key={post.post_id}>
             <div className='postInfo'>
@@ -47,6 +38,10 @@ function Posts() {
         );
       })}
     </div>
+  ) : (
+    <p>
+      <i>No posts</i>
+    </p>
   );
 }
 
