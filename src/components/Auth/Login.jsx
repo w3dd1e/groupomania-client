@@ -22,6 +22,9 @@ function LoginForm() {
         },
       });
       if (!response.ok) {
+        let invalidDiv = document.getElementById("invalidUser");
+        invalidDiv.innerHTML = "<p>Invalid Email or Password</p>";
+
         throw new Error(response.status);
       }
       setIsLoggedIn(true);
@@ -66,11 +69,7 @@ function LoginForm() {
             className='button'
           ></input>
         </div>
-        {isLoggedIn ? (
-          <p>Sucess</p>
-        ) : (
-          <p>User not found. Incorrect password or email.</p>
-        )}
+        <div id='invalidUser' className='invalidUser'></div>
       </form>
     </div>
   );
