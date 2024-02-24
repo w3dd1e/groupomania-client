@@ -6,7 +6,7 @@ function SignUp() {
     <div className='signup'>
       <form className='signUpForm' id='signUp'>
         <div className='inputContainer'>
-          <label for='username'>Username:</label>
+          <label htmlFor='username'>Username:</label>
           <input
             type='text'
             id='username'
@@ -15,7 +15,7 @@ function SignUp() {
           ></input>
         </div>
         <div className='inputContainer'>
-          <label for='email'>Email:</label>
+          <label htmlFor='email'>Email:</label>
           <input
             type='email'
             id='email'
@@ -24,7 +24,7 @@ function SignUp() {
           ></input>
         </div>
         <div className='inputContainer'>
-          <label for='password'>Password:</label>
+          <label htmlFor='password'>Password:</label>
           <input
             type='password'
             id='password'
