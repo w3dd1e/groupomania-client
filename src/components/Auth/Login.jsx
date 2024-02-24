@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import "./auth.css";
 
+fuction Login()
+
 function LoginForm() {
   return (
     <div className='login'>
-      <form className='loginForm' id='login'>
+      <form
+        method='post'
+        action={login}
+        id='login'
+      >
         <div className='inputContainer'>
           <label for='email'>Email:</label>
           <input
