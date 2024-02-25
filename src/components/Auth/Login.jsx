@@ -7,7 +7,6 @@ import "./auth.css";
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //prevent html form defaults and handle login fetch operations
   async function handleSubmit(e) {
@@ -27,7 +26,6 @@ function LoginForm() {
 
         throw new Error(response.status);
       }
-      setIsLoggedIn(true);
       return redirect("/feed");
     } catch (error) {
       console.log("There was a problem with the fetch operation.", error);
