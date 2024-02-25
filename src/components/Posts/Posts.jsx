@@ -6,10 +6,18 @@ import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
 import "./posts.css";
 
-const postsURL = "http://localhost:3000/posts";
-
 export async function getPosts() {
-  let response = await fetch(postsURL);
+  const postsURL = "http://localhost:3000/posts";
+  let getToken = () => {
+    return sessionStorage.getItem("token");
+  };
+  let token = getToken();
+
+  let response = await fetch(postsURL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   //posts = await response.json();
   console.log("Data fetched from database!");
