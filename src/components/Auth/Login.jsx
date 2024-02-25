@@ -23,9 +23,13 @@ function LoginForm() {
       if (!response.ok) {
         let invalidDiv = document.getElementById("invalidUser");
         invalidDiv.innerHTML = "<p>Invalid Email or Password</p>";
-
         throw new Error(response.status);
       }
+
+      let data = await response.json();
+      sessionStorage.setItem("token", data.token);
+      console.log(data);
+
       return redirect("/feed");
     } catch (error) {
       console.log("There was a problem with the fetch operation.", error);
