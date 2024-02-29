@@ -1,4 +1,4 @@
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./auth.css";
 
@@ -7,6 +7,7 @@ import "./auth.css";
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   //prevent html form defaults and handle login fetch operations
   async function handleSubmit(e) {
@@ -29,8 +30,7 @@ function LoginForm() {
       let data = await response.json();
       sessionStorage.setItem("token", data.token);
       console.log(data);
-
-      return redirect("/feed");
+      return navigate("/feed", { replace: true });
     } catch (error) {
       console.log("There was a problem with the fetch operation.", error);
     }

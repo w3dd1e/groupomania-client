@@ -8,9 +8,11 @@ import "./posts.css";
 
 export async function getPosts() {
   const postsURL = "http://localhost:3000/posts";
+
   let getToken = () => {
     return sessionStorage.getItem("token");
   };
+
   let token = getToken();
 
   let response = await fetch(postsURL, {
@@ -18,14 +20,12 @@ export async function getPosts() {
       Authorization: `Bearer ${token}`,
     },
   });
-
   //posts = await response.json();
   console.log("Data fetched from database!");
   return response;
 }
-
 function Posts() {
-  const { posts } = useLoaderData();
+  const posts = useLoaderData();
 
   return posts.length ? (
     <div className='board'>
