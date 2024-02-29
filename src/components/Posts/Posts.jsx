@@ -6,24 +6,23 @@ import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
 import "./posts.css";
 
+//Retrieve posts from database
 export async function getPosts() {
   const postsURL = "http://localhost:3000/posts";
-
   let getToken = () => {
     return sessionStorage.getItem("token");
   };
-
   let token = getToken();
-
   let response = await fetch(postsURL, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  //posts = await response.json();
   console.log("Data fetched from database!");
   return response;
 }
+
+//Generate post elements to display on page
 function Posts() {
   const posts = useLoaderData();
 
@@ -42,6 +41,7 @@ function Posts() {
       })}
     </div>
   ) : (
+    //If no posts in database, display "No posts"
     <p>
       <i>No posts</i>
     </p>
