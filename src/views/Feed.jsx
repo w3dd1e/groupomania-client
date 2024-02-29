@@ -4,10 +4,11 @@ import ToolBar from "../components/ToolBar/ToolBar";
 
 export async function loader() {
   const response = await getPosts();
+
   if (response.status === 401) {
     return redirect("/login");
   } else {
-    return { posts };
+    return response;
   }
 }
 
