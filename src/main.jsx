@@ -5,7 +5,7 @@ import App from "./views/App";
 import LoginPage from "./views/LoginPage";
 import SignUpPage from "./views/SignUpPage";
 import Feed, { loader as feedLoader } from "./views/Feed";
-import ProfilePage from "./views/ProfilePage";
+import ProfilePage, { loader as profileLoader } from "./views/ProfilePage";
 import InboxPage from "./views/InboxPage";
 import SearchPage from "./views/SearchPage";
 import SettingsPage from "./views/SettingsPage";
@@ -42,6 +42,7 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <ProfilePage />,
+            loader: profileLoader,
           },
           {
             path: "inbox",
