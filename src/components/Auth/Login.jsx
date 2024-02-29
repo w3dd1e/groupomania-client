@@ -29,6 +29,7 @@ function LoginForm() {
 
       let data = await response.json();
       sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("userId", data.userId);
       console.log(data);
       return navigate("/feed", { replace: true });
     } catch (error) {
