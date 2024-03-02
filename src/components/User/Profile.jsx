@@ -1,15 +1,10 @@
 import "./user.css";
+import { useLoaderData } from "react-router-dom";
 
-const user = {
-  name: "Kelly Weddle",
-  location: "Kansas City",
-  department: "Sales",
-  about: "I like movies!",
-  image: "src/assets/Ducky.jpeg",
-};
+const userId = sessionStorage.userId;
 
 export async function getProfile() {
-  const profileURL = "http://localhost:3000/posts";
+  const profileURL = `http://localhost:3000/profile/${userId}`;
   let getToken = () => {
     return sessionStorage.getItem("token");
   };
@@ -24,13 +19,15 @@ export async function getProfile() {
 }
 
 function Profile() {
+  const user = useLoaderData();
+  console.log(user);
   return (
     <div className='profile'>
       <img className='profileImage' src={user.image}></img>
       <div className='about'>
         <h2 className='fullName'>{user.name}</h2>
         <p className='aboutInfo'>
-          Username: &emsp;
+          Username: &emsp;{user.username}
           <br />
           Department: &emsp;{user.department}
           <br />
