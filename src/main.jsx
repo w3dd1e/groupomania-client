@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             loader: feedLoader,
           },
           {
-            path: "profile/:id",
+            path: "profile/:userId",
             element: <ProfilePage />,
             loader: profileLoader,
           },

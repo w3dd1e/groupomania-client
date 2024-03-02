@@ -13,7 +13,7 @@ const userId = sessionStorage.userId;
 function Navbar() {
   const menuLinks = [
     { link: "feed", icon: <FaTableList /> },
-    { link: `profile/:${userId}`, icon: <FaUser /> },
+    { link: `profile/${userId}`, icon: <FaUser /> },
     { link: "inbox", icon: <FaRegMessage /> },
     { link: "search", icon: <FaMagnifyingGlass /> },
     { link: "settings", icon: <FaGear /> },
