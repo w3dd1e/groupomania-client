@@ -25,13 +25,14 @@ function Profile() {
     <div className='profile'>
       <img className='profileImage' src={user.image}></img>
       <div className='about'>
-        <h2 className='fullName'>{user.name}</h2>
+        <h2 className='username'>{user.username}</h2>
         <p className='aboutInfo'>
-          Username: &emsp;{user.username}
+          &emsp;{user.firstName}
+          {user.lastName}
           <br />
-          Department: &emsp;{user.department}
+          &emsp;{user.department}
           <br />
-          Location: &emsp;{user.location}
+          &emsp;{user.location}
         </p>
       </div>
     </div>
