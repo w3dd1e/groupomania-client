@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
 import './auth.css';
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [username, setUsername] = useState('');
-	const { login } = useAuth();
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -27,11 +24,9 @@ const LoginForm = () => {
 			}
 
 			let data = await response.json();
-			setUsername(data.username);
 			sessionStorage.setItem('token', data.token);
 			sessionStorage.setItem('userId', data.userId);
 			console.log(data);
-			await login({ username });
 		} catch (error) {
 			console.log('There was a problem with the fetch operation.', error);
 		}
