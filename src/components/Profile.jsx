@@ -10,20 +10,47 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { redirect } from "react-router-dom";
 
+//Function to get user data from session storage
+const getUserData = (value) => {
+  return sessionStorage.getItem(value);
+};
+
+const token = getUserData("token");
+const userId = getUserData("userId");
+
+//Fetch Profile
+async function getProfile() {
+  const profileURL = `http://localhost:3000/profile/${userId}`;
+
+  let response = await fetch(profileURL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log("Data fetched from database!");
+  return response;
+}
+
+//Loader funciton for Router
+export async function loader() {
+  const response = await getProfile();
+
+  if (response.status === 401) {
+    return redirect("/login");
+  } else {
+    return response;
+  }
+}
+
+//Create list items for use in the profile
 const ProfileItem = styled(ListItem)(() => ({
   padding: 0,
+  alignItems: "flex-start",
 }));
 
 export default function Profile() {
-  const user = {
-    username: "admin",
-    name: "Kelly",
-    department: "Asset Management",
-    location: "Kansas City",
-    bio: "I love movies and dogs",
-  };
-
   return (
     <Container component='main' maxWidth='xs' sx={{ p: 2 }}>
       <h2 className='pageTitle'>Profile</h2>
@@ -56,15 +83,15 @@ export default function Profile() {
                   <ProfileItem alignItems='flex-start'>
                     <Typography component='h1' variant='h5' fontWeight='bold'>
                       {user.username}
-                    </Typography>{" "}
+                    </Typography>
                   </ProfileItem>
-                  <ProfileItem alignItems='flex-start'>
+                  <ProfileItem>
                     <ListItemText primary={user.name} />
                   </ProfileItem>
-                  <ProfileItem alignItems='flex-start'>
+                  <ProfileItem>
                     <ListItemText primary={user.department} />
                   </ProfileItem>
-                  <ProfileItem alignItems='flex-start'>
+                  <ProfileItem>
                     <ListItemText primary={user.location} />
                   </ProfileItem>
                 </List>
