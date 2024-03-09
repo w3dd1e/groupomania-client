@@ -7,7 +7,7 @@ import SvgIcon from "@mui/material/SvgIcon";
 export default function MenuAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+      <AppBar position='fixed'>
         <Toolbar>
           <h1 className='appTitle'>GroupBoard by GroupoMania</h1>
           <div>
