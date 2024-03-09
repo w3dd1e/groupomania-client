@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 export default function NewPost() {
   return (
     <Stack sx={{ p: 2 }}>
+      <h2 className='pageTitle'>New Post</h2>
       <Box
         component='form'
         sx={{
@@ -15,8 +16,15 @@ export default function NewPost() {
         noValidate
         autoComplete='off'
       >
-        <TextField required fullWidth label='Title' margin='normal'></TextField>
         <TextField
+          required
+          fullWidth
+          label='Title'
+          margin='normal'
+          variant='filled'
+        ></TextField>
+        <TextField
+          variant='filled'
           required
           fullWidth
           label='Body'
@@ -24,7 +32,9 @@ export default function NewPost() {
           rows={4}
           margin='normal'
         ></TextField>
-        <Button>Submit</Button>
+        <Button variant='contained' color='primary' sx={{ my: 2 }}>
+          Submit
+        </Button>
       </Box>
     </Stack>
   );

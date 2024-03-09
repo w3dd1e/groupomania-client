@@ -1,7 +1,5 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
@@ -27,9 +25,10 @@ export default function Profile() {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
-      <CssBaseline />
-      <Grid container justifyContent='center' spacing={3} sx={{ mt: 2 }}>
+    <Container component='main' maxWidth='xs' sx={{ p: 2 }}>
+      <h2 className='pageTitle'>Profile</h2>
+
+      <Grid container justifyContent='center' spacing={3} sx={{ mt: 1 }}>
         <Grid item>
           <Paper elevation={6}>
             <Grid container spacing={2} sx={{ p: 1 }}>
