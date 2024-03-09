@@ -8,17 +8,39 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { redirect } from "react-router-dom";
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    //Convert FormData to JSON
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+    const formDataObj = {};
+    data.forEach((value, key) => (formDataObj[key] = value));
+    const json = JSON.stringify(formDataObj);
 
+    try {
+      const response = await fetch("http://localhost:3000/auth/signup", {
+        method: "POST",
+        body: json,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        let invalidDiv = document.getElementById("invalidUser");
+        invalidDiv.innerHTML = "<p>There was an error.</p>";
+
+        throw new Error(response.status);
+      }
+      if (response.ok) {
+        return redirect("/login");
+      }
+    } catch (error) {
+      console.log("There was a problem with the fetch operation.", error);
+    }
+  };
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -40,12 +62,12 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete='userName'
-                name='userName'
+                autoComplete='username'
+                name='username'
                 required
                 fullWidth
-                id='userName'
-                label='UserName'
+                id='username'
+                label='Username'
                 autoFocus
               />
             </Grid>

@@ -3,23 +3,51 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
+import { useSessionStorage } from "../hooks/useSessionStorage";
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const [token, setToken] = useSessionStorage("token", null);
+  const [userId, setUserId] = useSessionStorage("userId", null);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    //Convert FormData to JSON
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formDataObj = {};
+    data.forEach((value, key) => (formDataObj[key] = value));
+    const json = JSON.stringify(formDataObj);
+    //Fetch Login
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        body: json,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        let invalidDiv = document.getElementById("invalidUser");
+        invalidDiv.innerHTML = "<p>Invalid Email or Password</p>";
+        throw new Error(response.status);
+      }
+      const userData = await response.json();
+
+      setToken(userData.token);
+      setUserId(userData.userId);
+
+      navigate("/feed");
+    } catch (error) {
+      console.log("There was a problem with the fetch operation.", error);
+    }
   };
 
   return (
@@ -78,6 +106,7 @@ export default function SignIn() {
             </Grid>
           </Grid>
         </Box>
+        <div id='invalidUser'></div>
       </Box>
     </Container>
   );
