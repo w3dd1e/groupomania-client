@@ -18,6 +18,16 @@ export async function getProfile() {
   return response;
 }
 
+export function editButton() {
+  if (isLoggedIn) {
+    return (
+      <button id='edit' className='button'>
+        Edit
+      </button>
+    );
+  }
+}
+
 function Profile() {
   const user = useLoaderData();
   console.log(user);
