@@ -1,10 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useSessionStorage } from '../../hooks/useSessionStorage';
 import './auth.css';
 
 const LoginForm = () => {
+	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [token, setToken] = useSessionStorage('token', null);
+	const [userId, setUserId] = useSessionStorage('userId', null);
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -24,9 +28,9 @@ const LoginForm = () => {
 			}
 
 			let data = await response.json();
-			sessionStorage.setItem('token', data.token);
-			sessionStorage.setItem('userId', data.userId);
-			console.log(data);
+			setToken(data.token);
+			setUserId(data.userId);
+			navigate('/feed');
 		} catch (error) {
 			console.log('There was a problem with the fetch operation.', error);
 		}
