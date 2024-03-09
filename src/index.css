@@ -69,3 +69,8 @@ button:focus-visible {
 .pageTitle {
   margin: 1rem 0rem 0rem 0rem;
 }
+
+.appTitle {
+  font-size: 1rem;
+  flex: 1;
+}
