@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp";
 import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import NewPost from "./components/NewPost";
+import EditProfile from "./components/EditProfile";
 
 import "./index.css";
 
@@ -42,9 +43,10 @@ const router = createBrowserRouter([
             /*loader: profileLoader,*/
           },
           {
-            path: "new",
+            path: "newPost",
             element: <NewPost />,
           },
+          { path: "editProfile", element: <EditProfile /> },
         ],
       },
     ],
