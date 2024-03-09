@@ -32,9 +32,14 @@ export default function NewPost() {
           rows={4}
           margin='normal'
         ></TextField>
-        <Button variant='contained' color='primary' sx={{ my: 2 }}>
-          Submit
-        </Button>
+        <Stack>
+          <Button variant='contained' color='primary' sx={{ my: 2 }}>
+            Submit
+          </Button>
+          <Button variant='contained' color='error' sx={{ my: 2 }}>
+            Cancel
+          </Button>
+        </Stack>
       </Box>
     </Stack>
   );
