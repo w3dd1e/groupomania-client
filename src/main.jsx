@@ -9,6 +9,7 @@ import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 import NewPost from "./components/NewPost";
 import EditProfile from "./components/EditProfile";
+import Delete from "./components/Delete";
 
 import "./index.css";
 
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
             element: <NewPost />,
           },
           { path: "editProfile", element: <EditProfile /> },
+          { path: "deleteAccount", element: <Delete /> },
         ],
       },
     ],
