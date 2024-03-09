@@ -29,10 +29,10 @@ export default function Profile() {
       <h2 className='pageTitle'>Profile</h2>
 
       <Grid container justifyContent='center' spacing={3} sx={{ mt: 1 }}>
-        <Grid item>
+        <Grid>
           <Paper elevation={6}>
             <Grid container spacing={2} sx={{ p: 1 }}>
-              <Grid item>
+              <Grid>
                 <Avatar
                   variant='rounded'
                   alt='Ducky'
@@ -45,7 +45,7 @@ export default function Profile() {
                   }}
                 />
               </Grid>
-              <Grid item>
+              <Grid>
                 <List
                   sx={{
                     display: "flex",
@@ -70,28 +70,18 @@ export default function Profile() {
                 </List>
               </Grid>
 
-              <Grid item sx={{ textAlign: "center", p: 1, m: 1 }}>
-                {user.bio}
-              </Grid>
+              <Grid sx={{ textAlign: "center", p: 1, m: 1 }}>{user.bio}</Grid>
             </Grid>
           </Paper>
         </Grid>
-        <Grid item>
-          <Stack direction='row' spacing={3} sx={{ mt: 2 }}>
-            <Button variant='outlined' size='small' xs={3} flex={1}>
-              Edit Profile
-            </Button>
-            <Button
-              variant='outlined'
-              size='small'
-              color='error'
-              xs={3}
-              flex={1}
-            >
-              Delete Account
-            </Button>
-          </Stack>
-        </Grid>
+        <Stack direction='column' flex={1} sx={{ p: 1.5 }}>
+          <Button variant='contained' color='primary' sx={{ my: 2 }}>
+            Edit Profile
+          </Button>
+          <Button variant='contained' color='error' sx={{ my: 2 }}>
+            Delete Account
+          </Button>
+        </Stack>
       </Grid>
     </Container>
   );
