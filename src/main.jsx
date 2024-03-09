@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import NewPost from "./components/NewPost";
 import EditProfile from "./components/EditProfile";
 import Delete from "./components/Delete";
+import PostView from "./components/PostView";
 
 import "./index.css";
 
@@ -39,14 +40,16 @@ const router = createBrowserRouter([
             /*loader: feedLoader,*/
           },
           {
+            path: "newPost",
+            element: <NewPost />,
+          },
+          { path: "post", element: <PostView /> },
+          {
             path: "profile",
             element: <Profile />,
             /*loader: profileLoader,*/
           },
-          {
-            path: "newPost",
-            element: <NewPost />,
-          },
+
           { path: "editProfile", element: <EditProfile /> },
           { path: "deleteAccount", element: <Delete /> },
         ],
