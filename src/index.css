@@ -65,3 +65,7 @@ button:focus-visible {
 #root {
   width: 100%;
 }
+
+.pageTitle {
+  margin: 1rem 0rem 0rem 0rem;
+}
