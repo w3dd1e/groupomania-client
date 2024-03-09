@@ -23,7 +23,7 @@ function Profile() {
   console.log(user);
   return (
     <div className='profile'>
-      <img className='profileImage' src={user.image}></img>
+      <img className='profileImage' src={user.profileImage}></img>
       <div className='about'>
         <h2 className='username'>{user.username}</h2>
         <p className='aboutInfo'>
