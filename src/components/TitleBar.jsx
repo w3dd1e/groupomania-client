@@ -50,6 +50,7 @@ export default function MenuAppBar() {
 					</div>
 				</Toolbar>
 			</AppBar>
+			{/*Duplicate Toobar componenet needed to correct content placement, per Material UI Documentation */}
 			<Toolbar />
 		</Box>
 	);
