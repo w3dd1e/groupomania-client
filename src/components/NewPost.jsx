@@ -12,7 +12,6 @@ export default function NewPost() {
 	};
 
 	const token = getUserData('token');
-	const userId = getUserData('userId');
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
