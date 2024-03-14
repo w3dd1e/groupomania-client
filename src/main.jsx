@@ -1,54 +1,65 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./views/App";
-import LoginPage from "./views/LoginPage";
-import SignUpPage from "./views/SignUpPage";
-import Feed, { loader as feedLoader } from "./views/Feed";
-import ProfilePage, { loader as profileLoader } from "./views/ProfilePage";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './pages/App';
+import ErrorPage from './pages/ErrorPage';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import Feed from './components/Feed';
+import Profile, { loader as profileLoader } from './components/Profile';
+import NewPost from './components/NewPost';
+import EditProfile from './components/EditProfile';
+import Delete from './components/Delete';
+import PostView from './components/PostView';
 
-import ErrorPage from "./views/ErrorPage";
-
-import "./index.css";
+import './index.css';
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
+	{
+		path: '/',
+		element: <App />,
+		errorElement: <ErrorPage />,
 
-    children: [
-      {
-        errorElement: <ErrorPage />,
+		children: [
+			{
+				errorElement: <ErrorPage />,
 
-        children: [
-          { index: true, element: <LoginPage /> },
-          {
-            path: "login",
-            element: <LoginPage />,
-          },
-          {
-            path: "signup",
-            element: <SignUpPage />,
-          },
-          {
-            path: "feed",
-            element: <Feed />,
-            loader: feedLoader,
-          },
-          {
-            path: "profile/:userId",
-            element: <ProfilePage />,
-            loader: profileLoader,
-          },
-        ],
-      },
-    ],
-  },
+				children: [
+					{ index: true, element: <SignIn /> },
+					{
+						path: 'login',
+						element: <SignIn />,
+					},
+					{
+						path: 'signup',
+						element: <SignUp />,
+					},
+					{
+						path: 'feed',
+						element: <Feed />,
+						/*loader: feedLoader,*/
+					},
+					{
+						path: 'newPost',
+						element: <NewPost />,
+					},
+					{ path: 'post/:postId', element: <PostView /> },
+					{
+						path: 'profile',
+						element: <Profile />,
+						loader: profileLoader,
+					},
+
+					{ path: 'editProfile', element: <EditProfile /> },
+					{ path: 'deleteAccount', element: <Delete /> },
+				],
+			},
+		],
+	},
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render(
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>
 );
