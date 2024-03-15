@@ -45,7 +45,7 @@ const router = createBrowserRouter([
 					},
 					{ path: 'post/:postId', element: <PostView /> },
 					{
-						path: 'profile',
+						path: 'profile/:userId',
 						element: <Profile />,
 						loader: profileLoader,
 					},
