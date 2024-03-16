@@ -10,7 +10,7 @@ import Profile, { loader as profileLoader } from './components/Profile';
 import NewPost from './components/NewPost';
 import EditProfile from './components/EditProfile';
 import Delete from './components/Delete';
-import PostView from './components/PostView';
+import PostView, { loader as postLoader } from './components/PostView';
 
 import './index.css';
 
@@ -43,7 +43,11 @@ const router = createBrowserRouter([
 						path: 'newPost',
 						element: <NewPost />,
 					},
-					{ path: 'post/:postId', element: <PostView /> },
+					{
+						path: 'post/:postId',
+						element: <PostView />,
+						loader: postLoader,
+					},
 					{
 						path: 'profile/:userId',
 						element: <Profile />,
