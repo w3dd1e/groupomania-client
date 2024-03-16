@@ -5,12 +5,12 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 
+const getUserData = (value) => {
+	return sessionStorage.getItem(value);
+};
+
 export default function NewPost() {
 	const navigate = useNavigate();
-	const getUserData = (value) => {
-		return sessionStorage.getItem(value);
-	};
-
 	const token = getUserData('token');
 
 	const handleSubmit = async (event) => {
@@ -22,7 +22,7 @@ export default function NewPost() {
 		const json = JSON.stringify(formDataObj);
 		//Fetch Login
 		try {
-			const response = await fetch('http://localhost:3000/posts', {
+			const response = await fetch(`http://localhost:3000/posts/`, {
 				method: 'POST',
 				body: json,
 				headers: {
