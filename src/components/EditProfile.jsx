@@ -4,10 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
-
-const getUserData = (value) => {
-	return sessionStorage.getItem(value);
-};
+import { getUserData } from '../helpers/helpers';
 
 export default function NewPost() {
 	const navigate = useNavigate();

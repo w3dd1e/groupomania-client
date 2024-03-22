@@ -12,11 +12,9 @@ import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { redirect } from 'react-router-dom';
 import { useLoaderData, Link } from 'react-router-dom';
+import { getUserData } from '../helpers/helpers';
 
 //Function to get user data from session storage
-const getUserData = (value) => {
-	return sessionStorage.getItem(value);
-};
 
 //Fetch Profile
 async function getProfile() {
