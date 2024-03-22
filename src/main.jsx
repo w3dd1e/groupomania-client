@@ -5,12 +5,12 @@ import App from './pages/App';
 import ErrorPage from './pages/ErrorPage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import Feed from './components/Feed';
+import Feed, { loader as feedLoader } from './components/PostList';
 import Profile, { loader as profileLoader } from './components/Profile';
-import NewPost from './components/NewPost';
+import NewPost, { action as postAction } from './components/NewPost';
 import EditProfile from './components/EditProfile';
 import Delete from './components/Delete';
-import PostView, { loader as postLoader } from './components/PostView';
+import PostView, { loader as postLoader } from './components/Post';
 
 import './index.css';
 
@@ -37,11 +37,12 @@ const router = createBrowserRouter([
 					{
 						path: 'feed',
 						element: <Feed />,
-						/*loader: feedLoader,*/
+						loader: feedLoader,
 					},
 					{
 						path: 'newPost',
 						element: <NewPost />,
+						action: postAction,
 					},
 					{
 						path: 'post/:postId',
