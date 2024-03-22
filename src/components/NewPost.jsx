@@ -3,55 +3,54 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom';
+import { Form, Navigate } from 'react-router-dom';
+import { getUserData } from '../helpers/helpers';
 
-const getUserData = (value) => {
-	return sessionStorage.getItem(value);
+export const action = async () => {
+	const data = await new FormData(document.querySelector('form'));
+	const token = getUserData('token');
+	let invalidDiv = document.getElementById('errorDiv');
+
+	//Convert FormData to JSON
+	const formDataObj = {};
+	data.forEach((value, key) => (formDataObj[key] = value));
+	const json = JSON.stringify(formDataObj);
+	//Fetch Login
+
+	try {
+		const response = await fetch(`http://localhost:3000/posts/`, {
+			method: 'POST',
+			body: json,
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + token,
+			},
+		});
+		if (!response.ok) {
+			invalidDiv.innerHTML =
+				'<p>There was an error.  Your request was not processed.  Please try again later. </p>';
+			throw new Error(response.status);
+		}
+		const responseJson = await response.json();
+
+		//TODO Refactor this redirect once bug is resolved in React Router
+		//React Router v6.4 and higher Redirect does not work when redirecting to base URL + variable
+		//The provided work arounds do not work in Strict Mode
+		return window.location.replace(`/post/${responseJson.postId}`);
+	} catch (error) {
+		console.log('There was a problem with the fetch operation.', error);
+	}
+	return null;
 };
 
 export default function NewPost() {
-	const navigate = useNavigate();
-	const token = getUserData('token');
-
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		//Convert FormData to JSON
-		const data = new FormData(event.currentTarget);
-		const formDataObj = {};
-		data.forEach((value, key) => (formDataObj[key] = value));
-		const json = JSON.stringify(formDataObj);
-		//Fetch Login
-		try {
-			const response = await fetch(`http://localhost:3000/posts/`, {
-				method: 'POST',
-				body: json,
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + token,
-				},
-			});
-			if (!response.ok) {
-				let invalidDiv = document.getElementById('errorDiv');
-				invalidDiv.innerHTML =
-					'<p>There was an error.  Your request was not processed.  Please try again later. </p>';
-				throw new Error(response.status);
-			}
-
-			const postData = await response.json();
-			console.log(postData);
-
-			navigate(`/post/${postData.postId}`);
-		} catch (error) {
-			console.log('There was a problem with the fetch operation.', error);
-		}
-	};
 	return (
 		<Stack sx={{ p: 2 }}>
 			<h2 className='pageTitle'>New Post</h2>
 			<Box
-				component='form'
-				onSubmit={handleSubmit}
+				component={Form}
+				method='post'
 				sx={{
 					'& .MuiTextField-root': { width: 1 },
 				}}
