@@ -20,7 +20,7 @@ function PostCard(props) {
         alignItems='flex-start'
         sx={{ pl: 0, width: "100%", px: 0 }}
       >
-        <Card dense sx={{ width: "100%", p: 1 }}>
+        <Card sx={{ width: "100%", p: 1 }}>
           <CardHeader
             title={
               <Link className='titleLink' to={`/post/${props.post_id}`}>
@@ -34,7 +34,6 @@ function PostCard(props) {
               width: 1,
             }}
             sx={{ p: 1, width: 1, wordWrap: "anywhere" }}
-            wrap
           ></CardHeader>
           <CardContent sx={{ p: 1 }}>
             <Typography noWrap variant='body2' color='text.secondary'>
