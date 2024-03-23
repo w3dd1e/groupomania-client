@@ -2,18 +2,15 @@ import * as React from "react";
 import {
   ListItem,
   ListItemAvatar,
-  ListItemText,
   Avatar,
   Typography,
-  Divider,
   CardHeader,
+  Card,
+  CardActions,
+  CardContent,
+  Button,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 
 function PostCard(props) {
   return (
@@ -21,7 +18,7 @@ function PostCard(props) {
       <ListItem
         key={props.post_id}
         alignItems='flex-start'
-        sx={{ pl: 0, width: "100%" }}
+        sx={{ pl: 0, width: "100%", px: 0 }}
       >
         <Card dense sx={{ width: "100%", p: 1 }}>
           <CardHeader
