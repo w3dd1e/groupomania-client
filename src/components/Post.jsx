@@ -14,15 +14,10 @@ import { redirect, useLoaderData, Link } from "react-router-dom";
 import { getUserData } from "../helpers/helpers";
 
 //Fetch Post
-async function getPost() {
+async function getPost(postId) {
   const token = getUserData("token");
-  const path = window.location.pathname;
-  const postId = path.split("/");
-  console.log(path);
 
-  const postURL = `http://localhost:3000/posts/${postId[2]}`;
-
-  let response = await fetch([postURL], {
+  const response = await fetch(`http://localhost:3000/posts/${postId}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -37,8 +32,8 @@ async function getPost() {
 }
 
 //Loader funciton for Router
-export async function loader() {
-  const res = await getPost();
+export async function loader({ params }) {
+  const res = await getPost(params.postId);
   const data = await res.json();
   return data;
 }
