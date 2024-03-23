@@ -1,64 +1,112 @@
 import * as React from 'react';
 import List from '@mui/material/List';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Stack } from '@mui/material';
-import { redirect, useLoaderData } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 import PostCard from './PostCard';
 
-async function getAllPosts() {
+export default function Feed() {
+	const [items, setItems] = React.useState([]);
+	const [hasMore, setHasMore] = React.useState(true);
+	const [index, setIndex] = React.useState(12);
 	const token = getUserData('token');
 
-	const postURL = `http://localhost:3000/posts/`;
+	React.useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch(
+					'http://localhost:3000/posts?offset=0',
+					{
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							Authorization: 'Bearer ' + token,
+						},
+					}
+				);
+				const data = await response.json();
+				await setItems(data);
 
-	let response = await fetch([postURL], {
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + token,
-		},
-	});
+				return data;
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchData();
+	}, [token]);
 
-	console.log('Data fetched from database!');
-	const data = await response.json();
-	console.log(data);
-	return data;
-}
+	const fetchMoreData = async () => {
+		try {
+			let response = await fetch(
+				`http://localhost:3000/posts?offset=${index}`,
+				{
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer ' + token,
+					},
+				}
+			);
+			const data = await response.json();
+			await setItems((prevItems) => [...prevItems, ...data]);
 
-//Loader funciton for Router
-export async function loader() {
-	const response = await getAllPosts();
+			data.length > 0 ? setHasMore(true) : setHasMore(false);
 
-	if (response.status === 401) {
-		return redirect('/login');
-	} else {
-		return response;
-	}
-}
+			setIndex((prevIndex) => prevIndex + 10);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
-export default function Feed() {
-	const data = useLoaderData();
-	const listPosts = data.map((post) => (
+	const listPosts = items.map((post) => (
 		<PostCard
 			key={post.post_id}
 			user_id={post.user_id}
 			post_id={post.post_id}
 			headline={post.headline}
 			content={post.content}
+			username={post.user.username}
+			profileImage={post.user.profileImage}
 		/>
 	));
 
 	return (
-		<Stack sx={{ p: 2 }}>
+		<>
 			<h2 className='pageTitle'>Feed</h2>
-			<List
-				sx={{
-					width: '100%',
-					maxWidth: 360,
-					bgcolor: 'background.paper',
-				}}
-			>
-				{listPosts}
-			</List>
-		</Stack>
+			<Stack sx={{ p: 2, pt: 0 }}>
+				<div>
+					<InfiniteScroll
+						dataLength={items.length}
+						next={fetchMoreData}
+						hasMore={hasMore}
+						loader={<p>Loading...</p>}
+						endMessage={<p>You&apos;ve seen all the posts!</p>}
+						refreshFunction={() => this.fetchData()}
+						pullDownToRefresh
+						pullDownToRefreshThreshold={75}
+						pullDownToRefreshContent={
+							<h3 style={{ textAlign: 'center' }}>
+								&#8595; Pull down to refresh
+							</h3>
+						}
+						releaseToRefreshContent={
+							<h3 style={{ textAlign: 'center' }}>
+								&#8593; Release to refresh
+							</h3>
+						}
+					>
+						<List
+							sx={{
+								width: '100%',
+								maxWidth: 360,
+								bgcolor: 'background.paper',
+							}}
+						>
+							{listPosts}
+						</List>
+					</InfiniteScroll>
+				</div>
+			</Stack>
+		</>
 	);
 }
