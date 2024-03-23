@@ -64,6 +64,7 @@ export default function Feed() {
       content={post.content}
       username={post.user.username}
       profileImage={post.user.profileImage}
+      createdAt={post.createdAt}
     />
   ));
 
