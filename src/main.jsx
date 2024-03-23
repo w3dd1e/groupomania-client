@@ -5,7 +5,7 @@ import App from './pages/App';
 import ErrorPage from './pages/ErrorPage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import Feed, { loader as feedLoader } from './components/PostList';
+import Feed from './components/PostList';
 import Profile, { loader as profileLoader } from './components/Profile';
 import NewPost, { action as postAction } from './components/NewPost';
 import EditProfile from './components/EditProfile';
@@ -37,7 +37,6 @@ const router = createBrowserRouter([
 					{
 						path: 'feed',
 						element: <Feed />,
-						loader: feedLoader,
 					},
 					{
 						path: 'newPost',
