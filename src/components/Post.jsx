@@ -51,7 +51,7 @@ export default function Post() {
 			<h2 className='pageTitle'>Post</h2>
 
 			<Grid container justifyContent='center' spacing={3} sx={{ mt: 1 }}>
-				<Grid>
+				<Grid className='contentBlock'>
 					<Paper elevation={6}>
 						<Card sx={{ maxWidth: 345 }}>
 							<CardHeader
@@ -62,7 +62,7 @@ export default function Post() {
 									></Avatar>
 								}
 								title={post.headline}
-								subheader={post.createdAt.split('T')[0]}
+								subheader=''
 								titleTypographyProps={{
 									fontSize: 18,
 									fontWeight: 700,
@@ -77,7 +77,12 @@ export default function Post() {
 									{post.content}
 								</Typography>
 							</CardContent>
-							<CardActions>
+							<CardActions
+								sx={{
+									display: 'flex',
+									justifyContent: 'space-between',
+								}}
+							>
 								<Button
 									component={Link}
 									to={`/profile/` + post.user_id}
@@ -86,6 +91,9 @@ export default function Post() {
 								>
 									{post.user.username}
 								</Button>
+								<Typography sx={{ fontSize: 13, pr: '10px' }}>
+									{post.createdAt.split('T')[0]}
+								</Typography>
 							</CardActions>
 						</Card>
 					</Paper>
