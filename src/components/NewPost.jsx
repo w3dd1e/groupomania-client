@@ -53,6 +53,11 @@ export default function NewPost() {
 				method='post'
 				sx={{
 					'& .MuiTextField-root': { width: 1 },
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'center',
+					alignItems: 'center',
+					p: 2,
 				}}
 				noValidate
 				autoComplete='off'
@@ -77,16 +82,23 @@ export default function NewPost() {
 					rows={4}
 					margin='normal'
 				></TextField>
-				<Stack>
+				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
+					{' '}
 					<Button
 						type='submit'
 						variant='contained'
 						color='primary'
 						sx={{ my: 2 }}
+						size='small'
 					>
 						Submit
 					</Button>
-					<Button variant='contained' color='error' sx={{ my: 2 }}>
+					<Button
+						size='small'
+						variant='contained'
+						color='error'
+						sx={{ my: 2 }}
+					>
 						Cancel
 					</Button>
 					<div id='errorDiv'></div>
