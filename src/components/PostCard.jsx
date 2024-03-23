@@ -8,29 +8,8 @@ import {
 	Divider,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { getUserData } from '../helpers/helpers';
 
-async function PostCard(props) {
-	async function getUserInfo(userId) {
-		const token = getUserData('token');
-		const userURL = `http://localhost:3000/profile/${userId}`;
-
-		let response = await fetch([userURL], {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				Authorization: 'Bearer ' + token,
-			},
-		});
-
-		console.log('Data fetched from database!');
-		const data = await response.json();
-		console.log(data);
-		return data;
-	}
-
-	const user = await getUserInfo(props.user_id);
-
+function PostCard(props) {
 	return (
 		<>
 			<ListItem
@@ -39,7 +18,7 @@ async function PostCard(props) {
 				sx={{ pl: 0 }}
 			>
 				<ListItemAvatar>
-					<Avatar alt={user.username} src={user.profileImage} />
+					<Avatar alt={props.username} src={props.profileImage} />
 				</ListItemAvatar>
 				<ListItemText
 					primary={
@@ -55,8 +34,7 @@ async function PostCard(props) {
 								variant='body2'
 								color='text.primary'
 							>
-								{' '}
-								{user.username}
+								{props.username}
 							</Typography>
 							{props.content}
 						</React.Fragment>
