@@ -147,7 +147,7 @@ export default function Post() {
 						onSubmit={(event) => {
 							if (
 								!confirm(
-									'Please confirm you want to delete this record.'
+									'Please confirm you want to delete this post.'
 								)
 							) {
 								event.preventDefault();
