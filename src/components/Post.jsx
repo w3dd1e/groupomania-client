@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Unstable_Grid2';
 import { Paper } from '@mui/material';
 import CardHeader from '@mui/material/CardHeader';
 import CardActions from '@mui/material/CardActions';
@@ -27,6 +26,9 @@ async function getPost(postId) {
 	if (response.status === 401) {
 		return redirect('/login');
 	}
+	if (response.status === 404) {
+		throw new Error('Post not found');
+	}
 	console.log('Data fetched from database!');
 	return response;
 }
@@ -35,6 +37,10 @@ async function getPost(postId) {
 export async function loader({ params }) {
 	const res = await getPost(params.postId);
 	const data = await res.json();
+	if (data === null) {
+		throw new Error('Post not found');
+	}
+
 	return data;
 }
 
