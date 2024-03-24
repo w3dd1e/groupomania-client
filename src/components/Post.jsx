@@ -9,13 +9,12 @@ import CardHeader from '@mui/material/CardHeader';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
-import { redirect, useLoaderData, Link } from 'react-router-dom';
+import { redirect, useLoaderData, Link, Form } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
 //Fetch Post
 async function getPost(postId) {
 	const token = getUserData('token');
-
 	const response = await fetch(`http://localhost:3000/posts/${postId}`, {
 		headers: {
 			Accept: 'application/json',
@@ -33,6 +32,26 @@ async function getPost(postId) {
 	return response;
 }
 
+async function deletePost(postId) {
+	const token = getUserData('token');
+	const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+		method: 'DELETE',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + token,
+		},
+	});
+	if (response.status === 401) {
+		return redirect('/login');
+	}
+	if (response.status === 404) {
+		throw new Error('Post not found');
+	}
+	console.log('Deleted!');
+	return response;
+}
+
 //Loader funciton for Router
 export async function loader({ params }) {
 	const res = await getPost(params.postId);
@@ -40,8 +59,16 @@ export async function loader({ params }) {
 	if (data === null) {
 		throw new Error('Post not found');
 	}
-
 	return data;
+}
+
+export async function action({ params }) {
+	const res = await deletePost(params.postId);
+	const data = await res.json();
+	if (data === null) {
+		throw new Error('Post not found');
+	}
+	return redirect('/feed');
 }
 
 export default function Post() {
@@ -113,16 +140,30 @@ export default function Post() {
 					>
 						Edit Post
 					</Button>
-					<Button
-						component={Link}
-						to='/deletePost'
-						variant='contained'
-						color='error'
-						sx={{ my: 2 }}
-						size='small'
+					<Form
+						sx={{ width: 1 }}
+						method='post'
+						action='delete'
+						onSubmit={(event) => {
+							if (
+								!confirm(
+									'Please confirm you want to delete this record.'
+								)
+							) {
+								event.preventDefault();
+							}
+						}}
 					>
-						Delete Post
-					</Button>
+						<Button
+							type='submit'
+							variant='contained'
+							color='error'
+							sx={{ my: 2, width: 1 }}
+							size='small'
+						>
+							Delete Post
+						</Button>
+					</Form>
 				</Stack>
 			</Stack>
 		</Container>

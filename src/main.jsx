@@ -7,10 +7,13 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Feed from './components/PostList';
 import Profile, { loader as profileLoader } from './components/Profile';
-import NewPost, { action as postAction } from './components/NewPost';
+import NewPost, { action as newAction } from './components/NewPost';
 import EditProfile from './components/EditProfile';
 import Delete from './components/Delete';
-import PostView, { loader as postLoader } from './components/Post';
+import Post, {
+	loader as postLoader,
+	action as deleteAction,
+} from './components/Post';
 
 import './index.css';
 
@@ -41,12 +44,18 @@ const router = createBrowserRouter([
 					{
 						path: 'newPost',
 						element: <NewPost />,
-						action: postAction,
+						action: newAction,
 					},
 					{
 						path: 'post/:postId',
-						element: <PostView />,
+						element: <Post />,
 						loader: postLoader,
+						children: [
+							{
+								path: 'delete',
+								action: deleteAction,
+							},
+						],
 					},
 					{
 						path: 'profile/:userId',
