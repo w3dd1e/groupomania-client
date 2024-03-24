@@ -17,6 +17,8 @@ import Post, {
 	loader as postLoader,
 	action as deletePostAction,
 } from './components/Post';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { AuthProvider } from './hooks/useAuth';
 
 import './index.css';
 
