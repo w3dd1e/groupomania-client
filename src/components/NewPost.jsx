@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { Form, Navigate } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
 export const action = async () => {
@@ -33,11 +33,8 @@ export const action = async () => {
 			throw new Error(response.status);
 		}
 		const responseJson = await response.json();
-
-		//TODO Refactor this redirect once bug is resolved in React Router
-		//React Router v6.4 and higher Redirect does not work when redirecting to base URL + variable
-		//The provided work arounds do not work in Strict Mode
-		return window.location.replace(`/post/${responseJson.postId}`);
+		const postId = responseJson.postId;
+		return redirect(`/post/${postId}`);
 	} catch (error) {
 		console.log('There was a problem with the fetch operation.', error);
 	}
