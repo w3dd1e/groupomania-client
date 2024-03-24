@@ -91,12 +91,13 @@ export default function NewPost() {
 						Submit
 					</Button>
 					<Button
+						type='reset'
 						size='small'
 						variant='contained'
 						color='error'
 						sx={{ my: 2 }}
 					>
-						Cancel
+						Reset
 					</Button>
 					<div id='errorDiv'></div>
 				</Stack>
