@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useLoaderData, Link, redirect } from 'react-router-dom';
+import { useLoaderData, Link, redirect, Form } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
 //Function to get user data from session storage
@@ -36,6 +36,29 @@ async function getProfile(userId) {
 	return response;
 }
 
+async function deleteAccount(userId) {
+	const token = getUserData('token');
+	const response = await fetch(`http://localhost:3000/profile/${userId}`, {
+		method: 'DELETE',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + token,
+		},
+	});
+	if (response.status === 401) {
+		return redirect('/login');
+	}
+	if (response.status === 404) {
+		throw new Error('User not found');
+	}
+	if (response.status === 400) {
+		throw new Error('Bad request');
+	}
+	console.log('Deleted!');
+	return response;
+}
+
 //Loader funciton for Router
 export async function loader({ params }) {
 	const response = await getProfile(params.userId);
@@ -45,6 +68,14 @@ export async function loader({ params }) {
 	}
 
 	return data;
+}
+export async function action({ params }) {
+	const res = await deleteAccount(params.userId);
+	const data = await res.json();
+	if (data === null) {
+		throw new Error('User not found');
+	}
+	return redirect('/login');
 }
 
 //Create list items for use in the profile
@@ -128,15 +159,30 @@ export default function Profile() {
 					>
 						Edit Profile
 					</Button>
-					<Button
-						component={Link}
-						variant='contained'
-						color='error'
-						sx={{ my: 2 }}
-						size='small'
+					<Form
+						sx={{ width: 1 }}
+						method='post'
+						action='delete'
+						onSubmit={(event) => {
+							if (
+								!confirm(
+									'Please confirm you want to delete this account.'
+								)
+							) {
+								event.preventDefault();
+							}
+						}}
 					>
-						Delete Account
-					</Button>
+						<Button
+							type='submit'
+							variant='contained'
+							color='error'
+							sx={{ my: 2, width: 1 }}
+							size='small'
+						>
+							Delete Account
+						</Button>
+					</Form>
 				</Stack>
 			</Stack>
 		</Container>

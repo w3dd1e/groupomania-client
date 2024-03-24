@@ -6,13 +6,16 @@ import ErrorPage from './pages/ErrorPage';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Feed from './components/PostList';
-import Profile, { loader as profileLoader } from './components/Profile';
+import Profile, {
+	loader as profileLoader,
+	action as deleteProfileAction,
+} from './components/Profile';
 import NewPost, { action as newAction } from './components/NewPost';
 import EditProfile from './components/EditProfile';
 import Delete from './components/Delete';
 import Post, {
 	loader as postLoader,
-	action as deleteAction,
+	action as deletePostAction,
 } from './components/Post';
 
 import './index.css';
@@ -53,7 +56,7 @@ const router = createBrowserRouter([
 						children: [
 							{
 								path: 'delete',
-								action: deleteAction,
+								action: deletePostAction,
 							},
 						],
 					},
@@ -61,6 +64,12 @@ const router = createBrowserRouter([
 						path: 'profile/:userId',
 						element: <Profile />,
 						loader: profileLoader,
+						children: [
+							{
+								path: 'delete',
+								action: deleteProfileAction,
+							},
+						],
 					},
 
 					{ path: 'editProfile', element: <EditProfile /> },
