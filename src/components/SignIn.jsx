@@ -12,7 +12,6 @@ import { Form, redirect } from 'react-router-dom';
 
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
-	console.log(data);
 
 	//Convert FormData to JSON
 	const formDataObj = {};
@@ -37,7 +36,6 @@ export const action = async () => {
 		const userData = await response.json();
 		sessionStorage.setItem('token', userData.token);
 		sessionStorage.setItem('userId', userData.userId);
-		console.log(userData);
 
 		return redirect('/feed');
 	} catch (error) {
