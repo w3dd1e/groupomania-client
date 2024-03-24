@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
-export default function NewPost() {
+export default function EditProfile() {
 	const navigate = useNavigate();
 	const token = getUserData('token');
 	const userId = getUserData('userId');
