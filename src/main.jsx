@@ -17,8 +17,6 @@ import Post, {
 	loader as postLoader,
 	action as deletePostAction,
 } from './components/Post';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import { AuthProvider } from './hooks/useAuth';
 
 import './index.css';
 
@@ -33,7 +31,7 @@ const router = createBrowserRouter([
 				errorElement: <ErrorPage />,
 
 				children: [
-					{ index: true, element: <SignIn /> },
+					{ index: true, element: <SignIn />, action: loginAction },
 					{
 						path: 'login',
 						element: <SignIn />,
