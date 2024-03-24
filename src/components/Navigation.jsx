@@ -11,6 +11,7 @@ import { NavLink as RouterLink } from 'react-router-dom';
 
 export default function Navigation() {
 	const [value, setValue] = React.useState(0);
+	//const navigate = useNavigate();
 	const ref = React.useRef(null);
 
 	return (
@@ -39,7 +40,7 @@ export default function Navigation() {
 					/>
 					<BottomNavigationAction
 						LinkComponent={RouterLink}
-						to='/profile'
+						to={'/profile/' + sessionStorage.userId}
 						label='Profile'
 						icon={<AccountCircleIcon />}
 					/>

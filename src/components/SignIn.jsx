@@ -8,47 +8,42 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useNavigate } from 'react-router-dom';
-import { useSessionStorage } from '../hooks/useSessionStorage';
+import { Form, redirect } from 'react-router-dom';
 
-export default function SignIn() {
-	const navigate = useNavigate();
-	const [token, setToken] = useSessionStorage('token', null);
-	const [userId, setUserId] = useSessionStorage('userId', null);
+export const action = async () => {
+	const data = await new FormData(document.querySelector('form'));
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		//Convert FormData to JSON
-		const data = new FormData(event.currentTarget);
-		const formDataObj = {};
-		data.forEach((value, key) => (formDataObj[key] = value));
-		const json = JSON.stringify(formDataObj);
-		//Fetch Login
-		try {
-			const response = await fetch('http://localhost:3000/auth/login', {
-				method: 'POST',
-				body: json,
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-			});
-			if (!response.ok) {
-				let invalidDiv = document.getElementById('invalidUser');
-				invalidDiv.innerHTML = '<p>Invalid Email or Password</p>';
-				throw new Error(response.status);
-			}
-			const userData = await response.json();
+	//Convert FormData to JSON
+	const formDataObj = {};
+	data.forEach((value, key) => (formDataObj[key] = value));
+	const json = JSON.stringify(formDataObj);
 
-			setToken(userData.token);
-			setUserId(userData.userId);
-
-			navigate('/feed');
-		} catch (error) {
-			console.log('There was a problem with the fetch operation.', error);
+	//Fetch Login
+	try {
+		const response = await fetch('http://localhost:3000/auth/login', {
+			method: 'POST',
+			body: json,
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		});
+		if (!response.ok) {
+			let invalidDiv = document.getElementById('invalidUser');
+			invalidDiv.innerHTML = '<p>Invalid Email or Password</p>';
+			throw new Error(response.status);
 		}
-	};
+		const userData = await response.json();
+		sessionStorage.setItem('token', userData.token);
+		sessionStorage.setItem('userId', userData.userId);
 
+		return redirect('/feed');
+	} catch (error) {
+		console.log('There was a problem with the fetch operation.', error);
+	}
+	return null;
+};
+export default function SignIn() {
 	return (
 		<Container component='main' maxWidth='xs'>
 			<Box
@@ -66,10 +61,16 @@ export default function SignIn() {
 					Sign in
 				</Typography>
 				<Box
-					component='form'
-					onSubmit={handleSubmit}
+					component={Form}
+					method='post'
 					noValidate
-					sx={{ mt: 1 }}
+					sx={{
+						mt: 1,
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						width: 1,
+					}}
 				>
 					<TextField
 						margin='normal'
@@ -94,19 +95,22 @@ export default function SignIn() {
 
 					<Button
 						type='submit'
-						fullWidth
+						size='small'
 						variant='contained'
-						sx={{ mt: 3, mb: 2 }}
+						sx={{ mt: 3, mb: 2, width: 0.5 }}
 					>
 						Sign In
 					</Button>
-					<Grid container>
-						<Grid item xs></Grid>
+					<Grid
+						container
+						sx={{ display: 'flex', justifyContent: 'center' }}
+					>
 						<Grid item>
 							<Link href='signup' variant='body2'>
 								{"Don't have an account? Sign Up"}
 							</Link>
 						</Grid>
+						<div id='errorDiv'></div>
 					</Grid>
 				</Box>
 				<div id='invalidUser'></div>

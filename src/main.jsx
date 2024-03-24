@@ -3,14 +3,20 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './pages/App';
 import ErrorPage from './pages/ErrorPage';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import Feed from './components/Feed';
-import Profile, { loader as profileLoader } from './components/Profile';
-import NewPost from './components/NewPost';
+import SignIn, { action as loginAction } from './components/SignIn';
+import SignUp, { action as signUpAction } from './components/SignUp';
+import Feed from './components/PostList';
+import Profile, {
+	loader as profileLoader,
+	action as deleteProfileAction,
+} from './components/Profile';
+import NewPost, { action as newAction } from './components/NewPost';
 import EditProfile from './components/EditProfile';
 import Delete from './components/Delete';
-import PostView from './components/PostView';
+import Post, {
+	loader as postLoader,
+	action as deletePostAction,
+} from './components/Post';
 
 import './index.css';
 
@@ -29,25 +35,43 @@ const router = createBrowserRouter([
 					{
 						path: 'login',
 						element: <SignIn />,
+						action: loginAction,
 					},
 					{
 						path: 'signup',
 						element: <SignUp />,
+						action: signUpAction,
 					},
 					{
 						path: 'feed',
 						element: <Feed />,
-						/*loader: feedLoader,*/
 					},
 					{
 						path: 'newPost',
 						element: <NewPost />,
+						action: newAction,
 					},
-					{ path: 'post/:postId', element: <PostView /> },
 					{
-						path: 'profile',
+						path: 'post/:postId',
+						element: <Post />,
+						loader: postLoader,
+						children: [
+							{
+								path: 'delete',
+								action: deletePostAction,
+							},
+						],
+					},
+					{
+						path: 'profile/:userId',
 						element: <Profile />,
 						loader: profileLoader,
+						children: [
+							{
+								path: 'delete',
+								action: deleteProfileAction,
+							},
+						],
 					},
 
 					{ path: 'editProfile', element: <EditProfile /> },
