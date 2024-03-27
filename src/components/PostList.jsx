@@ -65,6 +65,7 @@ export default function Feed() {
       username={post.user.username}
       profileImage={post.user.profileImage}
       createdAt={post.createdAt}
+      read={`read` + post.read_status}
     />
   ));
 

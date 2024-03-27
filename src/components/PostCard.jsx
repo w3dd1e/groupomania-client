@@ -23,7 +23,10 @@ function PostCard(props) {
         <Card sx={{ width: "100%", p: 1 }}>
           <CardHeader
             title={
-              <Link className='titleLink' to={`/post/${props.post_id}`}>
+              <Link
+                className={`titlelink ${props.read}`}
+                to={`/post/${props.post_id}`}
+              >
                 {props.headline}
               </Link>
             }
