@@ -69,6 +69,7 @@ export default function Feed() {
 			profileImage={post.user.profileImage}
 			createdAt={post.createdAt}
 			read={`read` + post.read_status}
+			elevation={post.read_status ? 1.5 : 8}
 		/>
 	));
 
@@ -101,7 +102,8 @@ export default function Feed() {
 							sx={{
 								width: '100%',
 								maxWidth: 360,
-								bgcolor: 'background.paper',
+
+								m: 'auto',
 							}}
 						>
 							{listPosts}
