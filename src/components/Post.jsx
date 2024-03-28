@@ -132,7 +132,7 @@ export default function Post() {
 				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
 					<Button
 						component={Link}
-						to='/editPost'
+						to='edit'
 						variant='contained'
 						color='primary'
 						sx={{ my: 2 }}

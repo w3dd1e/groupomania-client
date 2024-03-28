@@ -151,7 +151,7 @@ export default function Profile() {
 				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
 					<Button
 						component={Link}
-						to='/editProfile'
+						to='edit'
 						variant='contained'
 						color='primary'
 						sx={{ my: 2 }}
