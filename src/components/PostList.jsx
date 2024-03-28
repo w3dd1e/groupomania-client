@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { List, Container } from '@mui/material';
+import { List, Container, Stack } from '@mui/material';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Stack } from '@mui/material';
 import { getUserData } from '../helpers/helpers';
 import PostCard from './PostCard';
 
@@ -74,9 +73,9 @@ export default function Feed() {
 	));
 
 	return (
-		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
+		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Feed</h2>
-			<Stack sx={{ p: 2, pt: 0 }}>
+			<Stack>
 				<div>
 					<InfiniteScroll
 						dataLength={items.length}
@@ -101,8 +100,9 @@ export default function Feed() {
 						<List
 							sx={{
 								width: '100%',
-								maxWidth: 360,
+								maxWidth: '90%',
 
+								p: 0,
 								m: 'auto',
 							}}
 						>

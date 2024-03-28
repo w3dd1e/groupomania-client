@@ -1,8 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import { Box, Container, TextField, Button, Stack } from '@mui/material';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
@@ -48,7 +45,7 @@ export default function EditPost() {
 		}
 	};
 	return (
-		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
+		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Edit Profile</h2>
 			<Box
 				onSubmit={handleSubmit}
@@ -59,7 +56,9 @@ export default function EditPost() {
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					p: 2,
+					m: 'auto',
+					mt: 0.7,
+					maxWidth: '90%',
 				}}
 				noValidate
 				autoComplete='off'

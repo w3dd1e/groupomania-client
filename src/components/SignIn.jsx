@@ -1,13 +1,15 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import {
+	Avatar,
+	Button,
+	TextField,
+	Link,
+	Grid,
+	Box,
+	Typography,
+	Container,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { Form, redirect } from 'react-router-dom';
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
@@ -43,10 +45,14 @@ export const action = async () => {
 };
 export default function SignIn() {
 	return (
-		<Container component='main' maxWidth='xs'>
+		<Container
+			component='main'
+			sx={{ maxWidth: { xs: '90%', sm: '60%', md: '50%', lg: '40%' } }}
+			className='mainContainer'
+		>
 			<Box
 				sx={{
-					marginTop: 8,
+					my: { xs: 10, sm: 20 },
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',

@@ -1,14 +1,16 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { Paper } from '@mui/material';
-import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Card from '@mui/material/Card';
+import {
+	Avatar,
+	Typography,
+	Container,
+	Stack,
+	Button,
+	Paper,
+	Card,
+	CardHeader,
+	CardActions,
+	CardContent,
+} from '@mui/material';
 import { redirect, useLoaderData, Link, Form } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
@@ -81,18 +83,17 @@ export default function Post() {
 	const post = useLoaderData();
 
 	return (
-		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
+		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Post</h2>
-
 			<Stack
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					p: 2,
-					maxWidth: 360,
+					maxWidth: '90%',
 					m: 'auto',
+					mt: 0.7,
 				}}
 			>
 				<Paper elevation={1} sx={{ width: 1 }}>

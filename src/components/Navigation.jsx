@@ -1,12 +1,13 @@
 import * as React from 'react';
-
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import {
+	Box,
+	BottomNavigation,
+	BottomNavigationAction,
+	Paper,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Paper from '@mui/material/Paper';
 import { NavLink as RouterLink } from 'react-router-dom';
 
 export default function Navigation() {

@@ -1,15 +1,18 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Unstable_Grid2';
-import { Paper } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import {
+	Avatar,
+	Typography,
+	Container,
+	List,
+	ListItem,
+	ListItemText,
+	Stack,
+	Button,
+	Grid,
+	Paper,
+	styled,
+} from '@mui/material';
+
 import {
 	useLoaderData,
 	Link,
@@ -105,7 +108,7 @@ export default function Profile() {
 		navigate('/login');
 	};
 	return (
-		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
+		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Profile</h2>
 			<Stack
 				sx={{
@@ -113,28 +116,47 @@ export default function Profile() {
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					maxWidth: 360,
 					m: 'auto',
-					p: 2,
 					width: '100%',
+					mt: 0.7,
+					maxWidth: '90%',
 				}}
 			>
 				<Paper elevation={1} sx={{ width: 1 }}>
-					<Grid container spacing={2} sx={{ p: 1 }}>
-						<Grid>
+					<Grid
+						container
+						sx={{
+							p: 2,
+							display: 'flex',
+							flexDirection: 'column',
+							gap: 2,
+						}}
+					>
+						<Typography
+							component='h3'
+							fontWeight='bold'
+							textAlign='center'
+							fontSize='1.25rem'
+						>
+							{user.username}
+						</Typography>
+						<Grid
+							sx={{
+								display: 'flex',
+								gap: 1.5,
+							}}
+						>
 							<Avatar
 								variant='rounded'
 								alt='Ducky'
 								src='../../src/assets/Ducky.jpeg'
 								sx={{
-									m: 1,
 									width: 125,
 									height: 125,
 									bgcolor: 'secondary.main',
 								}}
 							/>
-						</Grid>
-						<Grid>
+
 							<List
 								sx={{
 									display: 'flex',
@@ -142,15 +164,7 @@ export default function Profile() {
 									alignItems: 'flex-start',
 								}}
 							>
-								<ProfileItem alignItems='flex-start'>
-									<Typography
-										component='h1'
-										variant='h5'
-										fontWeight='bold'
-									>
-										{user.username}
-									</Typography>
-								</ProfileItem>
+								<ProfileItem alignItems='flex-start'></ProfileItem>
 								<ProfileItem>
 									<ListItemText primary={user.fullName} />
 								</ProfileItem>
@@ -162,10 +176,12 @@ export default function Profile() {
 								</ProfileItem>
 							</List>
 						</Grid>
-
-						<Grid sx={{ textAlign: 'center', p: 1, m: 1 }}>
+						<Typography
+							variant='body1'
+							sx={{ wordWrap: 'anywhere' }}
+						>
 							{user.bio}
-						</Grid>
+						</Typography>
 					</Grid>
 				</Paper>
 
@@ -179,6 +195,14 @@ export default function Profile() {
 						size='small'
 					>
 						Edit Profile
+					</Button>
+					<Button
+						variant='contained'
+						sx={{ my: 2, width: 1 }}
+						size='small'
+						onClick={logout}
+					>
+						Logout
 					</Button>
 					<Form
 						sx={{ width: 1 }}
@@ -204,14 +228,6 @@ export default function Profile() {
 							Delete Account
 						</Button>
 					</Form>
-					<Button
-						variant='contained'
-						sx={{ my: 2, width: 1 }}
-						size='small'
-						onClick={logout}
-					>
-						Logout
-					</Button>
 				</Stack>
 			</Stack>
 		</Container>

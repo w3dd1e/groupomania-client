@@ -1,8 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import { Box, TextField, Button, Stack } from '@mui/material';
 import { Form, redirect } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 import { Container } from '@mui/material';
@@ -44,7 +41,7 @@ export const action = async () => {
 
 export default function NewPost() {
 	return (
-		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
+		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>New Post</h2>
 			<Box
 				component={Form}
@@ -55,10 +52,10 @@ export default function NewPost() {
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					p: 2,
+
 					m: 'auto',
-					width: 1,
-					maxWidth: 360,
+					mt: 0.7,
+					maxWidth: '90%',
 				}}
 				noValidate
 				autoComplete='off'
