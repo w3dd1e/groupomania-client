@@ -3,10 +3,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
 export default function EditProfile() {
+	const user = useLoaderData();
 	const navigate = useNavigate();
 	const token = getUserData('token');
 	const userId = getUserData('userId');
@@ -65,6 +66,7 @@ export default function EditProfile() {
 					margin='normal'
 					variant='filled'
 					name='fullName'
+					defaultValue={user.fullName}
 				></TextField>
 				<TextField
 					variant='filled'
@@ -72,6 +74,7 @@ export default function EditProfile() {
 					label='Department'
 					margin='normal'
 					name='department'
+					defaultValue={user.department}
 				></TextField>
 				<TextField
 					variant='filled'
@@ -79,6 +82,7 @@ export default function EditProfile() {
 					label='Location'
 					margin='normal'
 					name='location'
+					defaultValue={user.location}
 				></TextField>
 				<TextField
 					variant='filled'
@@ -88,6 +92,7 @@ export default function EditProfile() {
 					rows={4}
 					margin='normal'
 					name='bio'
+					defaultValue={user.bio}
 				></TextField>
 				<Stack>
 					<Button
@@ -98,7 +103,14 @@ export default function EditProfile() {
 					>
 						Submit
 					</Button>
-					<Button variant='contained' color='error' sx={{ my: 2 }}>
+					<Button
+						variant='contained'
+						onClick={() => {
+							navigate(-1);
+						}}
+						color='error'
+						sx={{ my: 2 }}
+					>
 						Cancel
 					</Button>
 				</Stack>

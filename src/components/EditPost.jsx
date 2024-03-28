@@ -3,10 +3,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
 export default function EditPost() {
+	const post = useLoaderData();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
@@ -66,6 +67,7 @@ export default function EditPost() {
 					margin='normal'
 					name='headline'
 					variant='filled'
+					defaultValue={post.headline}
 				></TextField>
 				<TextField
 					variant='filled'
@@ -77,6 +79,7 @@ export default function EditPost() {
 					multiline
 					rows={4}
 					margin='normal'
+					defaultValue={post.content}
 				></TextField>
 				<Stack>
 					<Button
@@ -93,6 +96,9 @@ export default function EditPost() {
 						variant='contained'
 						color='error'
 						sx={{ my: 2 }}
+						onClick={() => {
+							navigate(-1);
+						}}
 					>
 						Cancel
 					</Button>

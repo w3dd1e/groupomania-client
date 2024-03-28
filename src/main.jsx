@@ -63,7 +63,11 @@ const router = createBrowserRouter([
 							},
 						],
 					},
-					{ path: 'post/:postId/edit', element: <EditPost /> },
+					{
+						path: 'post/:postId/edit',
+						element: <EditPost />,
+						loader: postLoader,
+					},
 					{
 						path: 'profile/:userId',
 						element: <Profile />,
@@ -76,7 +80,11 @@ const router = createBrowserRouter([
 						],
 					},
 
-					{ path: 'profile/:userId/edit', element: <EditProfile /> },
+					{
+						path: 'profile/:userId/edit',
+						element: <EditProfile />,
+						loader: profileLoader,
+					},
 					{ path: 'deleteAccount', element: <Delete /> },
 				],
 			},
