@@ -12,6 +12,7 @@ import Profile, {
 } from './components/Profile';
 import NewPost, { action as newAction } from './components/NewPost';
 import EditProfile from './components/EditProfile';
+import EditPost from './components/EditPost';
 import Delete from './components/Delete';
 import Post, {
 	loader as postLoader,
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
 							},
 						],
 					},
+					{ path: 'post/:postId/edit', element: <EditPost /> },
 					{
 						path: 'profile/:userId',
 						element: <Profile />,
@@ -74,7 +76,7 @@ const router = createBrowserRouter([
 						],
 					},
 
-					{ path: 'editProfile', element: <EditProfile /> },
+					{ path: 'profile/:userId/edit', element: <EditProfile /> },
 					{ path: 'deleteAccount', element: <Delete /> },
 				],
 			},
