@@ -203,7 +203,6 @@ export default function Profile() {
 					</Form>
 					<Button
 						variant='contained'
-						color='error'
 						sx={{ my: 2, width: 1 }}
 						size='small'
 						onClick={logout}
