@@ -48,13 +48,18 @@ export default function EditPost() {
 		}
 	};
 	return (
-		<Stack sx={{ p: 2 }}>
+		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Edit Profile</h2>
 			<Box
 				onSubmit={handleSubmit}
 				component='form'
 				sx={{
 					'& .MuiTextField-root': { width: 1 },
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'center',
+					alignItems: 'center',
+					p: 2,
 				}}
 				noValidate
 				autoComplete='off'
@@ -81,7 +86,8 @@ export default function EditPost() {
 					margin='normal'
 					defaultValue={post.content}
 				></TextField>
-				<Stack>
+				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
+					{' '}
 					<Button
 						type='submit'
 						variant='contained'
@@ -106,6 +112,6 @@ export default function EditPost() {
 				</Stack>
 			</Box>
 			<div id='errorDiv'></div>
-		</Stack>
+		</Container>
 	);
 }

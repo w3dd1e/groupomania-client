@@ -113,7 +113,10 @@ export default function Profile() {
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
+					maxWidth: 360,
+					m: 'auto',
 					p: 2,
+					width: '100%',
 				}}
 			>
 				<Paper elevation={1} sx={{ width: 1 }}>

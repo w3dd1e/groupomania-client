@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { Form, redirect } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
+import { Container } from '@mui/material';
 
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
@@ -43,7 +44,7 @@ export const action = async () => {
 
 export default function NewPost() {
 	return (
-		<Stack sx={{ p: 2 }}>
+		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>New Post</h2>
 			<Box
 				component={Form}
@@ -55,6 +56,9 @@ export default function NewPost() {
 					justifyContent: 'center',
 					alignItems: 'center',
 					p: 2,
+					m: 'auto',
+					width: 1,
+					maxWidth: 360,
 				}}
 				noValidate
 				autoComplete='off'
@@ -101,6 +105,6 @@ export default function NewPost() {
 					<div id='errorDiv'></div>
 				</Stack>
 			</Box>
-		</Stack>
+		</Container>
 	);
 }

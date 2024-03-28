@@ -91,6 +91,8 @@ export default function Post() {
 					justifyContent: 'center',
 					alignItems: 'center',
 					p: 2,
+					maxWidth: 360,
+					m: 'auto',
 				}}
 			>
 				<Paper elevation={1} sx={{ width: 1 }}>
