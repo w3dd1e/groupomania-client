@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './pages/App';
 import ErrorPage from './pages/ErrorPage';
@@ -13,13 +14,19 @@ import Profile, {
 import NewPost, { action as newAction } from './components/NewPost';
 import EditProfile from './components/EditProfile';
 import EditPost from './components/EditPost';
-import Delete from './components/Delete';
 import Post, {
 	loader as postLoader,
 	action as deletePostAction,
 } from './components/Post';
+import PrivateRoutes from './components/ProtectedRoute';
 
 import './index.css';
+
+const darkTheme = createTheme({
+	palette: {
+		mode: 'dark',
+	},
+});
 
 const router = createBrowserRouter([
 	{
@@ -33,67 +40,74 @@ const router = createBrowserRouter([
 
 				children: [
 					{ index: true, element: <SignIn />, action: loginAction },
-					{
-						path: 'login',
-						element: <SignIn />,
-						action: loginAction,
-					},
-					{
-						path: 'signup',
-						element: <SignUp />,
-						action: signUpAction,
-					},
-					{
-						path: 'feed',
-						element: <Feed />,
-					},
-					{
-						path: 'newPost',
-						element: <NewPost />,
-						action: newAction,
-					},
-					{
-						path: 'post/:postId',
-						element: <Post />,
-						loader: postLoader,
-						children: [
-							{
-								path: 'delete',
-								action: deletePostAction,
-							},
-						],
-					},
-					{
-						path: 'post/:postId/edit',
-						element: <EditPost />,
-						loader: postLoader,
-					},
-					{
-						path: 'profile/:userId',
-						element: <Profile />,
-						loader: profileLoader,
-						children: [
-							{
-								path: 'delete',
-								action: deleteProfileAction,
-							},
-						],
-					},
 
 					{
-						path: 'profile/:userId/edit',
-						element: <EditProfile />,
-						loader: profileLoader,
+						element: <PrivateRoutes />,
+						children: [
+							{
+								path: 'feed',
+								element: <Feed />,
+							},
+							{
+								path: 'newPost',
+								element: <NewPost />,
+								action: newAction,
+							},
+							{
+								path: 'post/:postId',
+								element: <Post />,
+								loader: postLoader,
+								children: [
+									{
+										path: 'delete',
+										action: deletePostAction,
+									},
+								],
+							},
+							{
+								path: 'post/:postId/edit',
+								element: <EditPost />,
+								loader: postLoader,
+							},
+							{
+								path: 'profile/:userId',
+								element: <Profile />,
+								loader: profileLoader,
+								children: [
+									{
+										path: 'delete',
+										action: deleteProfileAction,
+									},
+								],
+							},
+
+							{
+								path: 'profile/:userId/edit',
+								element: <EditProfile />,
+								loader: profileLoader,
+							},
+						],
 					},
-					{ path: 'deleteAccount', element: <Delete /> },
 				],
 			},
 		],
+	},
+	{
+		path: 'login',
+		element: <SignIn />,
+		action: loginAction,
+	},
+	{
+		path: 'signup',
+		element: <SignUp />,
+		action: signUpAction,
 	},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<ThemeProvider theme={darkTheme}>
+			<RouterProvider router={router} />
+		</ThemeProvider>
 	</React.StrictMode>
 );
