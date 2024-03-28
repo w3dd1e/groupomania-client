@@ -9,10 +9,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Form, redirect } from 'react-router-dom';
-
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
-
 	//Convert FormData to JSON
 	const formDataObj = {};
 	data.forEach((value, key) => (formDataObj[key] = value));
