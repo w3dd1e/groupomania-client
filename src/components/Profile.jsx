@@ -10,10 +10,16 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useLoaderData, Link, redirect, Form } from 'react-router-dom';
+import {
+	useLoaderData,
+	Link,
+	redirect,
+	Form,
+	useNavigate,
+} from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
-//Function to get user data from session storage
+//Logout
 
 //Fetch Profile
 async function getProfile(userId) {
@@ -61,13 +67,19 @@ async function deleteAccount(userId) {
 
 //Loader funciton for Router
 export async function loader({ params }) {
-	const response = await getProfile(params.userId);
-	const data = await response.json();
-	if (data === null) {
-		throw new Error('User not found');
-	}
+	const token = sessionStorage.getItem('token');
 
-	return data;
+	if (token) {
+		const response = await getProfile(params.userId);
+		const data = await response.json();
+		if (data === null) {
+			throw new Error('User not found');
+		}
+
+		return data;
+	} else {
+		return redirect('/login');
+	}
 }
 export async function action({ params }) {
 	const res = await deleteAccount(params.userId);
@@ -86,6 +98,12 @@ const ProfileItem = styled(ListItem)(() => ({
 
 export default function Profile() {
 	const user = useLoaderData();
+	const navigate = useNavigate();
+
+	const logout = () => {
+		sessionStorage.clear();
+		navigate('/login');
+	};
 	return (
 		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Profile</h2>
@@ -183,6 +201,15 @@ export default function Profile() {
 							Delete Account
 						</Button>
 					</Form>
+					<Button
+						variant='contained'
+						color='error'
+						sx={{ my: 2, width: 1 }}
+						size='small'
+						onClick={logout}
+					>
+						Logout
+					</Button>
 				</Stack>
 			</Stack>
 		</Container>

@@ -54,12 +54,18 @@ async function deletePost(postId) {
 
 //Loader funciton for Router
 export async function loader({ params }) {
-	const res = await getPost(params.postId);
-	const data = await res.json();
-	if (data === null) {
-		throw new Error('Post not found');
+	const token = sessionStorage.getItem('token');
+
+	if (token) {
+		const res = await getPost(params.postId);
+		const data = await res.json();
+		if (data === null) {
+			throw new Error('Post not found');
+		}
+		return data;
+	} else {
+		return redirect('/login');
 	}
-	return data;
 }
 
 export async function action({ params }) {
