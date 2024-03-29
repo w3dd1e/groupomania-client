@@ -68,7 +68,7 @@ export default function Feed() {
 			profileImage={post.user.profileImage}
 			createdAt={post.createdAt}
 			read={`read` + post.read_status}
-			elevation={post.read_status ? 1.5 : 8}
+			elevation={post.read_status ? 1 : 8}
 		/>
 	));
 
