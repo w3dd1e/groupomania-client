@@ -6,7 +6,7 @@ import App from './pages/App';
 import ErrorPage from './pages/ErrorPage';
 import SignIn, { action as loginAction } from './components/SignIn';
 import SignUp, { action as signUpAction } from './components/SignUp';
-import Feed from './components/PostList';
+import Feed from './components/Feed';
 import Profile, {
 	loader as profileLoader,
 	action as deleteProfileAction,
