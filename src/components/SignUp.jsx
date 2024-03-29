@@ -1,7 +1,6 @@
 import {
 	Avatar,
 	Button,
-	CssBaseline,
 	TextField,
 	Link,
 	Grid,
@@ -52,15 +51,17 @@ export default function SignUp() {
 			component='main'
 			maxWidth='xs'
 			className='mainContainer'
-			sx={{ maxWidth: { xs: '90%', sm: '60%', md: '50%', lg: '40%' } }}
+			sx={{
+				display: 'flex',
+				height: '80vh',
+			}}
 		>
-			<CssBaseline />
 			<Box
 				sx={{
-					my: { xs: 10, sm: 20 },
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
+					justifyContent: 'center',
 				}}
 			>
 				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
