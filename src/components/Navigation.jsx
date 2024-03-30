@@ -18,7 +18,12 @@ export default function Navigation() {
 	return (
 		<Box sx={{ pb: 7 }} ref={ref}>
 			<Paper
-				sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+				sx={{
+					position: 'fixed',
+					bottom: 0,
+					left: 0,
+					right: 0,
+				}}
 				variant='outlined'
 			>
 				<BottomNavigation

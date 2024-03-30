@@ -12,7 +12,6 @@ import {
 	Paper,
 	styled,
 } from '@mui/material';
-
 import {
 	useLoaderData,
 	Link,
@@ -21,6 +20,7 @@ import {
 	useNavigate,
 } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 //Logout
 
@@ -108,7 +108,11 @@ export default function Profile() {
 		navigate('/login');
 	};
 	return (
-		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
+		<Container
+			component='main'
+			className='mainContainer'
+			sx={{ p: 0, display: 'flex', flexDirection: 'column', flex: 1 }}
+		>
 			<h2 className='pageTitle'>Profile</h2>
 			<Stack
 				sx={{
@@ -120,9 +124,13 @@ export default function Profile() {
 					width: '100%',
 					mt: 0.7,
 					maxWidth: '90%',
+					flex: 1,
 				}}
 			>
-				<Paper elevation={1} sx={{ width: 1 }}>
+				<Paper
+					elevation={1}
+					sx={{ width: 1, flex: 1, display: 'flex' }}
+				>
 					<Grid
 						container
 						sx={{
@@ -130,6 +138,7 @@ export default function Profile() {
 							display: 'flex',
 							flexDirection: 'column',
 							gap: 2,
+							flex: 1,
 						}}
 					>
 						<Typography
@@ -137,6 +146,7 @@ export default function Profile() {
 							fontWeight='bold'
 							textAlign='center'
 							fontSize='1.25rem'
+							id='profileName'
 						>
 							{user.username}
 						</Typography>
@@ -144,6 +154,7 @@ export default function Profile() {
 							sx={{
 								display: 'flex',
 								gap: 1.5,
+								flex: 2,
 							}}
 						>
 							<Avatar
@@ -151,9 +162,17 @@ export default function Profile() {
 								alt='Ducky'
 								src='../../src/assets/Ducky.jpeg'
 								sx={{
-									width: 125,
-									height: 125,
+									height: '100%',
+									objectFit: 'cover',
+
 									bgcolor: 'secondary.main',
+									flex: 1,
+								}}
+								slotProps={{
+									img: {
+										className: 'profileImage',
+										flex: 1,
+									},
 								}}
 							/>
 
@@ -162,23 +181,39 @@ export default function Profile() {
 									display: 'flex',
 									flexDirection: 'column',
 									alignItems: 'flex-start',
+									flex: 1,
 								}}
 							>
 								<ProfileItem alignItems='flex-start'></ProfileItem>
 								<ProfileItem>
-									<ListItemText primary={user.fullName} />
+									<ListItemText
+										primary={user.fullName}
+										primaryTypographyProps={{
+											id: 'profileInfo',
+										}}
+									/>
 								</ProfileItem>
 								<ProfileItem>
-									<ListItemText primary={user.department} />
+									<ListItemText
+										primary={user.department}
+										primaryTypographyProps={{
+											id: 'profileInfo',
+										}}
+									/>
 								</ProfileItem>
 								<ProfileItem>
-									<ListItemText primary={user.location} />
+									<ListItemText
+										primary={user.location}
+										primaryTypographyProps={{
+											id: 'profileInfo',
+										}}
+									/>
 								</ProfileItem>
 							</List>
 						</Grid>
 						<Typography
 							variant='body1'
-							sx={{ wordWrap: 'anywhere' }}
+							sx={{ wordWrap: 'anywhere', flex: 1 }}
 						>
 							{user.bio}
 						</Typography>
