@@ -8,7 +8,7 @@ export default function MenuAppBar() {
 				<Toolbar>
 					<h1 className='appTitle'>GroupBoard by GroupoMania</h1>
 					<div>
-						<SvgIcon fontSize='large'>
+						<SvgIcon fontSize='large' id='appIcon'>
 							<svg
 								data-v-1084b650=''
 								xmlns='http://www.w3.org/2000/svg'

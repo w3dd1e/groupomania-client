@@ -82,7 +82,11 @@ export default function Feed() {
 						next={fetchMoreData}
 						hasMore={hasMore}
 						loader={<p>Loading...</p>}
-						endMessage={<p>You&apos;ve seen all the posts!</p>}
+						endMessage={
+							<p style={{ textAlign: 'center' }}>
+								You&apos;ve seen all the posts!
+							</p>
+						}
 						refreshFunction={() => this.fetchData()}
 						pullDownToRefresh
 						pullDownToRefreshThreshold={75}
@@ -105,6 +109,7 @@ export default function Feed() {
 								p: 0,
 								m: 'auto',
 							}}
+							id='feed'
 						>
 							{listPosts}
 						</List>

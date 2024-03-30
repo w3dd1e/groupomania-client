@@ -22,13 +22,14 @@ function PostCard(props) {
 			>
 				<Card
 					elevation={props.elevation}
-					sx={{ width: '100%', p: 2, py: 1.5 }}
+					sx={{ width: '100%', p: 2.5, py: 1.5 }}
 				>
 					<CardHeader
 						title={
 							<Link
 								className={props.read}
 								to={`/post/${props.post_id}`}
+								id='cardTitle'
 							>
 								{props.headline}
 							</Link>
@@ -44,6 +45,7 @@ function PostCard(props) {
 							noWrap
 							variant='body1'
 							color='text.secondary'
+							id='cardBody'
 						>
 							{props.content}
 						</Typography>

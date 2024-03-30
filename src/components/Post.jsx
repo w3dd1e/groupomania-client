@@ -95,6 +95,7 @@ export default function Post() {
 					m: 'auto',
 					mt: 0.7,
 				}}
+				id='post'
 			>
 				<Paper elevation={1} sx={{ width: 1 }}>
 					<Card sx={{ maxWidth: 345 }}>
@@ -110,11 +111,16 @@ export default function Post() {
 							titleTypographyProps={{
 								fontSize: 18,
 								fontWeight: 700,
+								id: 'postTitle',
 							}}
 						/>
 
 						<CardContent>
-							<Typography variant='body2' color='text.secondary'>
+							<Typography
+								variant='body2'
+								color='text.secondary'
+								id='postBody'
+							>
 								{post.content}
 							</Typography>
 						</CardContent>
@@ -138,41 +144,58 @@ export default function Post() {
 						</CardActions>
 					</Card>
 				</Paper>
-				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
-					<Button
-						component={Link}
-						to='edit'
-						variant='contained'
-						color='primary'
-						sx={{ my: 2 }}
-						size='small'
-					>
-						Edit Post
-					</Button>
-					<Form
-						sx={{ width: 1 }}
-						method='post'
-						action='delete'
-						onSubmit={(event) => {
-							if (
-								!confirm(
-									'Please confirm you want to delete this post.'
-								)
-							) {
-								event.preventDefault();
-							}
-						}}
-					>
+				<Stack
+					direction='column'
+					flex={1}
+					id='bottomStack'
+					sx={{
+						width: 1,
+						m: 1,
+						flex: 1,
+						display: 'flex',
+						alignContent: 'center',
+						alignItems: 'center',
+					}}
+				>
+					<div id='buttonGroup'>
 						<Button
-							type='submit'
+							component={Link}
+							to='edit'
 							variant='contained'
-							color='error'
-							sx={{ my: 2, width: 1 }}
+							color='primary'
+							sx={{ my: 2 }}
 							size='small'
+							id='button'
 						>
-							Delete Post
+							Edit Post
 						</Button>
-					</Form>
+						<Form
+							id='button'
+							sx={{ width: 1 }}
+							method='post'
+							action='delete'
+							onSubmit={(event) => {
+								if (
+									!confirm(
+										'Please confirm you want to delete this post.'
+									)
+								) {
+									event.preventDefault();
+								}
+							}}
+						>
+							<Button
+								type='submit'
+								variant='contained'
+								color='error'
+								sx={{ my: 2, width: 1 }}
+								size='small'
+								id='delete'
+							>
+								Delete Post
+							</Button>
+						</Form>
+					</div>
 				</Stack>
 			</Stack>
 		</Container>

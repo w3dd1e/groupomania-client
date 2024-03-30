@@ -46,7 +46,7 @@ export default function EditPost() {
 	};
 	return (
 		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
-			<h2 className='pageTitle'>Edit Profile</h2>
+			<h2 className='pageTitle'>Edit Post</h2>
 			<Box
 				onSubmit={handleSubmit}
 				component='form'
@@ -60,6 +60,7 @@ export default function EditPost() {
 					mt: 0.7,
 					maxWidth: '90%',
 				}}
+				id='form'
 				noValidate
 				autoComplete='off'
 			>
@@ -85,7 +86,12 @@ export default function EditPost() {
 					margin='normal'
 					defaultValue={post.content}
 				></TextField>
-				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
+				<Stack
+					direction='column'
+					flex={1}
+					id='buttonGroup'
+					sx={{ width: 0.5, m: 1 }}
+				>
 					{' '}
 					<Button
 						type='submit'
@@ -93,6 +99,7 @@ export default function EditPost() {
 						color='primary'
 						sx={{ my: 2 }}
 						size='small'
+						id='button'
 					>
 						Submit
 					</Button>
@@ -104,6 +111,7 @@ export default function EditPost() {
 						onClick={() => {
 							navigate(-1);
 						}}
+						id='button'
 					>
 						Cancel
 					</Button>

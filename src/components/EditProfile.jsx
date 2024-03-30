@@ -51,6 +51,7 @@ export default function EditProfile() {
 			<Box
 				onSubmit={handleSubmit}
 				component='form'
+				id='form'
 				sx={{
 					'& .MuiTextField-root': { width: 1 },
 					display: 'flex',
@@ -70,11 +71,13 @@ export default function EditProfile() {
 					margin='normal'
 					variant='filled'
 					name='fullName'
+					id='fullName'
 					defaultValue={user.fullName}
 				></TextField>
 				<TextField
 					variant='filled'
 					fullWidth
+					id='department'
 					label='Department'
 					margin='normal'
 					name='department'
@@ -83,6 +86,7 @@ export default function EditProfile() {
 				<TextField
 					variant='filled'
 					fullWidth
+					id='location'
 					label='Location'
 					margin='normal'
 					name='location'
@@ -92,19 +96,25 @@ export default function EditProfile() {
 					variant='filled'
 					fullWidth
 					label='Bio'
+					id='bio'
 					multiline
-					rows={4}
+					rows={6}
 					margin='normal'
 					name='bio'
 					defaultValue={user.bio}
 				></TextField>
-				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
-					{' '}
+				<Stack
+					direction='column'
+					flex={1}
+					id='buttonGroup'
+					sx={{ width: 0.5, m: 1 }}
+				>
 					<Button
 						type='submit'
 						variant='contained'
 						color='primary'
 						sx={{ my: 2 }}
+						id='button'
 					>
 						Submit
 					</Button>
@@ -115,6 +125,7 @@ export default function EditProfile() {
 						}}
 						color='error'
 						sx={{ my: 2 }}
+						id='button'
 					>
 						Cancel
 					</Button>

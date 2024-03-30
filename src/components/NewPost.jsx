@@ -57,6 +57,7 @@ export default function NewPost() {
 					mt: 0.7,
 					maxWidth: '90%',
 				}}
+				id='form'
 				noValidate
 				autoComplete='off'
 			>
@@ -77,16 +78,22 @@ export default function NewPost() {
 					label='Body'
 					name='content'
 					multiline
-					rows={4}
+					rows={6}
 					margin='normal'
 				></TextField>
-				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
+				<Stack
+					direction='column'
+					id='buttonGroup'
+					flex={1}
+					sx={{ width: 0.5, m: 1 }}
+				>
 					<Button
 						type='submit'
 						variant='contained'
 						color='primary'
 						sx={{ my: 2 }}
 						size='small'
+						id='button'
 					>
 						Submit
 					</Button>
@@ -96,6 +103,7 @@ export default function NewPost() {
 						variant='contained'
 						color='error'
 						sx={{ my: 2 }}
+						id='button'
 					>
 						Reset
 					</Button>
