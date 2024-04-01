@@ -2,6 +2,7 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+<<<<<<< HEAD
 ## Back end Installation
 Clone groupomania-server repo. From the "server" repository of the project, run `npm install`. You can then run the server with `npm start`. The server should run on localhost with default port 3000. If the server runs on another port for any reason, this is printed to the console when the server starts, e.g. Listening on port 3000.
 
