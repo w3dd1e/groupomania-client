@@ -1,6 +1,6 @@
-# Server Prerequisites
+# React + Vite
 
-You will need to have Node and npm installed locally on your machine.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 ## Back end Installation
 
