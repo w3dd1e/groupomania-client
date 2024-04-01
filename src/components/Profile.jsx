@@ -100,6 +100,7 @@ const ProfileItem = styled(ListItem)(() => ({
 }));
 
 export default function Profile() {
+	const isDesktop = useMediaQuery('(min-width: 1024px)');
 	const user = useLoaderData();
 	const navigate = useNavigate();
 
@@ -219,8 +220,8 @@ export default function Profile() {
 							sx={{
 								wordWrap: 'anywhere',
 								flex: 1,
-								fontSize: '1.25rem',
 							}}
+							id='profileInfo'
 						>
 							{user.bio}
 						</Typography>
@@ -250,14 +251,16 @@ export default function Profile() {
 						>
 							Edit Profile
 						</Button>
-						<Button
-							variant='contained'
-							sx={{ my: 2 }}
-							onClick={logout}
-							id='button'
-						>
-							Logout
-						</Button>
+						{isDesktop ? null : (
+							<Button
+								variant='contained'
+								sx={{ my: 2 }}
+								onClick={logout}
+								id='button'
+							>
+								Logout
+							</Button>
+						)}
 						<Form
 							sx={{ width: 1 }}
 							method='post'

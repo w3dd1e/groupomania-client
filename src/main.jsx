@@ -39,11 +39,11 @@ const router = createBrowserRouter([
 				errorElement: <ErrorPage />,
 
 				children: [
-					{ index: true, element: <SignIn />, action: loginAction },
-
 					{
 						element: <PrivateRoutes />,
 						children: [
+							{ index: true, element: <Feed /> },
+
 							{
 								path: 'feed',
 								element: <Feed />,

@@ -9,13 +9,15 @@ import AddIcon from '@mui/icons-material/Add';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { NavLink as RouterLink } from 'react-router-dom';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function Navigation() {
+	const isDesktop = useMediaQuery('(min-width: 1024px)');
 	const [value, setValue] = React.useState(0);
 	//const navigate = useNavigate();
 	const ref = React.useRef(null);
 
-	return (
+	return isDesktop ? null : (
 		<Box sx={{ pb: 7 }} ref={ref}>
 			<Paper
 				sx={{
