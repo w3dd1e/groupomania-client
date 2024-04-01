@@ -1,54 +1,113 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./views/App";
-import LoginPage from "./views/LoginPage";
-import SignUpPage from "./views/SignUpPage";
-import Feed, { loader as feedLoader } from "./views/Feed";
-import ProfilePage, { loader as profileLoader } from "./views/ProfilePage";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './pages/App';
+import ErrorPage from './pages/ErrorPage';
+import SignIn, { action as loginAction } from './components/SignIn';
+import SignUp, { action as signUpAction } from './components/SignUp';
+import Feed from './components/Feed';
+import Profile, {
+	loader as profileLoader,
+	action as deleteProfileAction,
+} from './components/Profile';
+import NewPost, { action as newAction } from './components/NewPost';
+import EditProfile from './components/EditProfile';
+import EditPost from './components/EditPost';
+import Post, {
+	loader as postLoader,
+	action as deletePostAction,
+} from './components/Post';
+import PrivateRoutes from './components/ProtectedRoute';
 
-import ErrorPage from "./views/ErrorPage";
+import './index.css';
 
-import "./index.css";
+const darkTheme = createTheme({
+	palette: {
+		mode: 'dark',
+	},
+});
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
+	{
+		path: '/',
+		element: <App />,
+		errorElement: <ErrorPage />,
 
-    children: [
-      {
-        errorElement: <ErrorPage />,
+		children: [
+			{
+				errorElement: <ErrorPage />,
 
-        children: [
-          { index: true, element: <LoginPage /> },
-          {
-            path: "login",
-            element: <LoginPage />,
-          },
-          {
-            path: "signup",
-            element: <SignUpPage />,
-          },
-          {
-            path: "feed",
-            element: <Feed />,
-            loader: feedLoader,
-          },
-          {
-            path: "profile/:userId",
-            element: <ProfilePage />,
-            loader: profileLoader,
-          },
-        ],
-      },
-    ],
-  },
+				children: [
+					{
+						element: <PrivateRoutes />,
+						children: [
+							{ index: true, element: <Feed /> },
+
+							{
+								path: 'feed',
+								element: <Feed />,
+							},
+							{
+								path: 'newPost',
+								element: <NewPost />,
+								action: newAction,
+							},
+							{
+								path: 'post/:postId',
+								element: <Post />,
+								loader: postLoader,
+								children: [
+									{
+										path: 'delete',
+										action: deletePostAction,
+									},
+								],
+							},
+							{
+								path: 'post/:postId/edit',
+								element: <EditPost />,
+								loader: postLoader,
+							},
+							{
+								path: 'profile/:userId',
+								element: <Profile />,
+								loader: profileLoader,
+								children: [
+									{
+										path: 'delete',
+										action: deleteProfileAction,
+									},
+								],
+							},
+
+							{
+								path: 'profile/:userId/edit',
+								element: <EditProfile />,
+								loader: profileLoader,
+							},
+						],
+					},
+				],
+			},
+		],
+	},
+	{
+		path: 'login',
+		element: <SignIn />,
+		action: loginAction,
+	},
+	{
+		path: 'signup',
+		element: <SignUp />,
+		action: signUpAction,
+	},
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render(
+	<React.StrictMode>
+		<ThemeProvider theme={darkTheme}>
+			<RouterProvider router={router} />
+		</ThemeProvider>
+	</React.StrictMode>
 );
