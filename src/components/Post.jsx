@@ -1,14 +1,16 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { Paper } from '@mui/material';
-import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Card from '@mui/material/Card';
+import {
+	Avatar,
+	Typography,
+	Container,
+	Stack,
+	Button,
+	Paper,
+	Card,
+	CardHeader,
+	CardActions,
+	CardContent,
+} from '@mui/material';
 import { redirect, useLoaderData, Link, Form } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
@@ -54,12 +56,18 @@ async function deletePost(postId) {
 
 //Loader funciton for Router
 export async function loader({ params }) {
-	const res = await getPost(params.postId);
-	const data = await res.json();
-	if (data === null) {
-		throw new Error('Post not found');
+	const token = sessionStorage.getItem('token');
+
+	if (token) {
+		const res = await getPost(params.postId);
+		const data = await res.json();
+		if (data === null) {
+			throw new Error('Post not found');
+		}
+		return data;
+	} else {
+		return redirect('/login');
 	}
-	return data;
 }
 
 export async function action({ params }) {
@@ -75,17 +83,19 @@ export default function Post() {
 	const post = useLoaderData();
 
 	return (
-		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
+		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Post</h2>
-
 			<Stack
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					p: 2,
+					maxWidth: '90%',
+					m: 'auto',
+					mt: 0.7,
 				}}
+				id='post'
 			>
 				<Paper elevation={1} sx={{ width: 1 }}>
 					<Card sx={{ maxWidth: 345 }}>
@@ -101,11 +111,16 @@ export default function Post() {
 							titleTypographyProps={{
 								fontSize: 18,
 								fontWeight: 700,
+								id: 'postTitle',
 							}}
 						/>
 
 						<CardContent>
-							<Typography variant='body2' color='text.secondary'>
+							<Typography
+								variant='body2'
+								color='text.secondary'
+								id='postBody'
+							>
 								{post.content}
 							</Typography>
 						</CardContent>
@@ -129,41 +144,58 @@ export default function Post() {
 						</CardActions>
 					</Card>
 				</Paper>
-				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
-					<Button
-						component={Link}
-						to='/editPost'
-						variant='contained'
-						color='primary'
-						sx={{ my: 2 }}
-						size='small'
-					>
-						Edit Post
-					</Button>
-					<Form
-						sx={{ width: 1 }}
-						method='post'
-						action='delete'
-						onSubmit={(event) => {
-							if (
-								!confirm(
-									'Please confirm you want to delete this post.'
-								)
-							) {
-								event.preventDefault();
-							}
-						}}
-					>
+				<Stack
+					direction='column'
+					flex={1}
+					id='bottomStack'
+					sx={{
+						width: 1,
+						m: 1,
+						flex: 1,
+						display: 'flex',
+						alignContent: 'center',
+						alignItems: 'center',
+					}}
+				>
+					<div id='buttonGroup'>
 						<Button
-							type='submit'
+							component={Link}
+							to='edit'
 							variant='contained'
-							color='error'
-							sx={{ my: 2, width: 1 }}
+							color='primary'
+							sx={{ my: 2 }}
 							size='small'
+							id='button'
 						>
-							Delete Post
+							Edit Post
 						</Button>
-					</Form>
+						<Form
+							id='button'
+							sx={{ width: 1 }}
+							method='post'
+							action='delete'
+							onSubmit={(event) => {
+								if (
+									!confirm(
+										'Please confirm you want to delete this post.'
+									)
+								) {
+									event.preventDefault();
+								}
+							}}
+						>
+							<Button
+								type='submit'
+								variant='contained'
+								color='error'
+								sx={{ my: 2, width: 1 }}
+								size='small'
+								id='delete'
+							>
+								Delete Post
+							</Button>
+						</Form>
+					</div>
 				</Stack>
 			</Stack>
 		</Container>

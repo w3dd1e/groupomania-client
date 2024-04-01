@@ -93,11 +93,106 @@ button:focus-visible {
 	font-size: 13px;
 }
 
-.titleLink {
+.readfalse {
+	color: #79a5ca;
+	font-weight: 700;
+}
+
+.readtrue {
 	color: #79a5ca;
 	font-weight: 700;
 }
 
 #error-page {
 	text-align: center;
+}
+.profileImage {
+	max-height: 250px;
+	max-width: 250px;
+	object-position: 50% 10%;
+	aspect-ratio: 1/1;
+}
+
+.content {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background-color: #121212;
+}
+
+#buttonGroup {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+}
+#bottomStack {
+	display: flex;
+}
+
+@media screen and (min-width: 600px) {
+	.pageTitle {
+		font-size: 2rem;
+	}
+	#profileName {
+		font-size: 1.75rem;
+	}
+
+	#profileInfo {
+		font-size: 1.5rem;
+	}
+	.appTitle {
+		font-size: 1.5rem;
+	}
+	#appIcon {
+		font-size: 3rem;
+	}
+
+	#postTitle {
+		font-size: 1.5rem;
+	}
+	#bottomStack {
+		flex-direction: row;
+		display: block;
+	}
+	#buttonGroup {
+		text-align: center;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		width: 100%;
+		justify-content: space-evenly;
+		gap: 1rem;
+		flex: 1;
+		flex-wrap: wrap;
+	}
+
+	#button {
+		flex: 1;
+		width: 30%;
+	}
+
+	#title,
+	#body,
+	#fullName,
+	#bio,
+	#department,
+	#location,
+	#button,
+	#delete,
+	#postBody {
+		font-size: 1.25rem;
+	}
+	#cardTitle,
+	#cardBody {
+		font-size: 1.5rem;
+	}
+	#feed,
+	#form,
+	#profile,
+	#post {
+		width: 80%;
+	}
+	#buttonForm {
+		width: 100%;
+	}
 }

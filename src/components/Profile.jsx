@@ -1,19 +1,28 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Unstable_Grid2';
-import { Paper } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useLoaderData, Link, redirect, Form } from 'react-router-dom';
+import {
+	Avatar,
+	Typography,
+	Container,
+	List,
+	ListItem,
+	ListItemText,
+	Stack,
+	Button,
+	Grid,
+	Paper,
+	styled,
+} from '@mui/material';
+import {
+	useLoaderData,
+	Link,
+	redirect,
+	Form,
+	useNavigate,
+} from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
+import useMediaQuery from '../hooks/useMediaQuery';
 
-//Function to get user data from session storage
+//Logout
 
 //Fetch Profile
 async function getProfile(userId) {
@@ -61,13 +70,19 @@ async function deleteAccount(userId) {
 
 //Loader funciton for Router
 export async function loader({ params }) {
-	const response = await getProfile(params.userId);
-	const data = await response.json();
-	if (data === null) {
-		throw new Error('User not found');
-	}
+	const token = sessionStorage.getItem('token');
 
-	return data;
+	if (token) {
+		const response = await getProfile(params.userId);
+		const data = await response.json();
+		if (data === null) {
+			throw new Error('User not found');
+		}
+
+		return data;
+	} else {
+		return redirect('/login');
+	}
 }
 export async function action({ params }) {
 	const res = await deleteAccount(params.userId);
@@ -85,104 +100,197 @@ const ProfileItem = styled(ListItem)(() => ({
 }));
 
 export default function Profile() {
+	const isDesktop = useMediaQuery('(min-width: 1024px)');
 	const user = useLoaderData();
+	const navigate = useNavigate();
+
+	const logout = () => {
+		sessionStorage.clear();
+		navigate('/login');
+	};
 	return (
-		<Container component='main' maxWidth='xs' sx={{ p: 0 }}>
+		<Container
+			component='main'
+			className='mainContainer'
+			sx={{ p: 0, display: 'flex', flexDirection: 'column', flex: 1 }}
+		>
 			<h2 className='pageTitle'>Profile</h2>
 			<Stack
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
-					justifyContent: 'center',
+					justifyContent: 'flex-start',
 					alignItems: 'center',
-					p: 2,
+					m: 'auto',
+					width: '100%',
+					mt: 0.7,
+					maxWidth: '90%',
+					flex: 1,
+					gap: 2,
 				}}
+				id='profile'
 			>
-				<Paper elevation={1} sx={{ width: 1 }}>
-					<Grid container spacing={2} sx={{ p: 1 }}>
-						<Grid>
+				<Paper
+					elevation={1}
+					sx={{ width: 1, display: 'flex', gap: 2, flex: 1 }}
+				>
+					<Grid
+						container
+						sx={{
+							p: 2,
+							display: 'flex',
+							flexDirection: 'column',
+							gap: 2,
+						}}
+					>
+						<Typography
+							component='h3'
+							fontWeight='bold'
+							textAlign='center'
+							fontSize='1.25rem'
+							id='profileName'
+						>
+							{user.username}
+						</Typography>
+						<Grid
+							sx={{
+								display: 'flex',
+								gap: 3,
+								flex: 1,
+							}}
+						>
 							<Avatar
 								variant='rounded'
 								alt='Ducky'
 								src='../../src/assets/Ducky.jpeg'
 								sx={{
-									m: 1,
-									width: 125,
-									height: 125,
+									height: '100%',
+									objectFit: 'cover',
+									maxHeight: '250px',
+									maxWidth: '250px',
 									bgcolor: 'secondary.main',
+									flex: 1,
+									aspectRatio: '1/1',
+								}}
+								slotProps={{
+									img: {
+										className: 'profileImage',
+										flex: 1,
+									},
 								}}
 							/>
-						</Grid>
-						<Grid>
+
 							<List
 								sx={{
 									display: 'flex',
 									flexDirection: 'column',
 									alignItems: 'flex-start',
+									flex: 1,
 								}}
 							>
-								<ProfileItem alignItems='flex-start'>
-									<Typography
-										component='h1'
-										variant='h5'
-										fontWeight='bold'
-									>
-										{user.username}
-									</Typography>
+								<ProfileItem alignItems='flex-start'></ProfileItem>
+								<ProfileItem>
+									<ListItemText
+										primary={user.fullName}
+										primaryTypographyProps={{
+											id: 'profileInfo',
+										}}
+									/>
 								</ProfileItem>
 								<ProfileItem>
-									<ListItemText primary={user.fullName} />
+									<ListItemText
+										primary={user.department}
+										primaryTypographyProps={{
+											id: 'profileInfo',
+										}}
+									/>
 								</ProfileItem>
 								<ProfileItem>
-									<ListItemText primary={user.department} />
-								</ProfileItem>
-								<ProfileItem>
-									<ListItemText primary={user.location} />
+									<ListItemText
+										primary={user.location}
+										primaryTypographyProps={{
+											id: 'profileInfo',
+										}}
+									/>
 								</ProfileItem>
 							</List>
 						</Grid>
-
-						<Grid sx={{ textAlign: 'center', p: 1, m: 1 }}>
+						<Typography
+							variant='body1'
+							sx={{
+								wordWrap: 'anywhere',
+								flex: 1,
+							}}
+							id='profileInfo'
+						>
 							{user.bio}
-						</Grid>
+						</Typography>
 					</Grid>
 				</Paper>
 
-				<Stack direction='column' flex={1} sx={{ width: 0.5, m: 1 }}>
-					<Button
-						component={Link}
-						to='/editProfile'
-						variant='contained'
-						color='primary'
-						sx={{ my: 2 }}
-						size='small'
-					>
-						Edit Profile
-					</Button>
-					<Form
-						sx={{ width: 1 }}
-						method='post'
-						action='delete'
-						onSubmit={(event) => {
-							if (
-								!confirm(
-									'Please confirm you want to delete this account.'
-								)
-							) {
-								event.preventDefault();
-							}
-						}}
-					>
+				<Stack
+					direction='column'
+					sx={{
+						width: 1,
+						m: 1,
+						flex: 1,
+						display: 'flex',
+						alignContent: 'center',
+						alignItems: 'center',
+					}}
+					id='bottomStack'
+				>
+					<div id='buttonGroup'>
 						<Button
-							type='submit'
+							component={Link}
+							to='edit'
 							variant='contained'
-							color='error'
-							sx={{ my: 2, width: 1 }}
-							size='small'
+							color='primary'
+							sx={{ my: 2 }}
+							id='button'
 						>
-							Delete Account
+							Edit Profile
 						</Button>
-					</Form>
+						{isDesktop ? null : (
+							<Button
+								variant='contained'
+								sx={{ my: 2 }}
+								onClick={logout}
+								id='button'
+							>
+								Logout
+							</Button>
+						)}
+						<Form
+							sx={{ width: 1 }}
+							method='post'
+							action='delete'
+							id='buttonForm'
+							onSubmit={(event) => {
+								if (
+									!confirm(
+										'Please confirm you want to delete this account.'
+									)
+								) {
+									event.preventDefault();
+								}
+							}}
+						>
+							<Button
+								type='submit'
+								variant='contained'
+								color='error'
+								id='delete'
+								sx={{
+									my: 2,
+									width: '100%',
+									px: 1,
+								}}
+							>
+								Delete Account
+							</Button>
+						</Form>
+					</div>
 				</Stack>
 			</Stack>
 		</Container>

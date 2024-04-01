@@ -1,18 +1,18 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import {
+	Avatar,
+	Button,
+	TextField,
+	Link,
+	Grid,
+	Box,
+	Typography,
+	Container,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { Form, redirect } from 'react-router-dom';
-
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
-
 	//Convert FormData to JSON
 	const formDataObj = {};
 	data.forEach((value, key) => (formDataObj[key] = value));
@@ -45,13 +45,22 @@ export const action = async () => {
 };
 export default function SignIn() {
 	return (
-		<Container component='main' maxWidth='xs'>
+		<Container
+			component='main'
+			maxWidth='xs'
+			className='mainContainer'
+			sx={{
+				display: 'flex',
+				height: '80vh',
+			}}
+		>
 			<Box
 				sx={{
-					marginTop: 8,
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
+					justifyContent: 'center',
+					width: 1,
 				}}
 			>
 				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>

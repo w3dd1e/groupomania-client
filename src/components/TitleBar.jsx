@@ -1,17 +1,39 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import SvgIcon from '@mui/material/SvgIcon';
+import {
+	AppBar,
+	Box,
+	Toolbar,
+	SvgIcon,
+	Button,
+	Menu,
+	MenuItem,
+} from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function MenuAppBar() {
+	const navigate = useNavigate();
+	const isDesktop = useMediaQuery('(min-width: 1024px)');
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const open = Boolean(anchorEl);
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+	const logout = () => {
+		sessionStorage.clear();
+		navigate('/login');
+	};
+
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='fixed'>
 				<Toolbar>
 					<h1 className='appTitle'>GroupBoard by GroupoMania</h1>
 					<div>
-						<SvgIcon fontSize='large'>
+						<SvgIcon fontSize='large' id='appIcon'>
 							<svg
 								data-v-1084b650=''
 								xmlns='http://www.w3.org/2000/svg'
@@ -48,6 +70,51 @@ export default function MenuAppBar() {
 							</svg>
 						</SvgIcon>
 					</div>
+					{!isDesktop ? null : (
+						<div>
+							<Button
+								id='basic-button'
+								aria-controls={open ? 'basic-menu' : undefined}
+								aria-haspopup='true'
+								aria-expanded={open ? 'true' : undefined}
+								onClick={handleClick}
+							>
+								Menu
+							</Button>
+							<Menu
+								id='basic-menu'
+								anchorEl={anchorEl}
+								open={open}
+								onClose={handleClose}
+								MenuListProps={{
+									'aria-labelledby': 'basic-button',
+								}}
+							>
+								<MenuItem onClick={handleClose}>
+									<Link style={{ color: '#fff' }} to='/feed'>
+										Feed
+									</Link>
+								</MenuItem>
+								<MenuItem onClick={handleClose}>
+									<Link
+										style={{ color: '#fff' }}
+										to='/newPost'
+									>
+										New Post
+									</Link>
+								</MenuItem>
+								<MenuItem onClick={handleClose}>
+									<Link
+										style={{ color: '#fff' }}
+										to={'/profile/' + sessionStorage.userId}
+									>
+										Profile
+									</Link>
+								</MenuItem>
+								<MenuItem onClick={logout}>Logout </MenuItem>
+							</Menu>
+						</div>
+					)}
 				</Toolbar>
 			</AppBar>
 			{/*Duplicate Toobar componenet needed to correct content placement, per Material UI Documentation */}

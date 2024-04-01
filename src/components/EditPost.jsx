@@ -3,16 +3,16 @@ import { Box, Container, TextField, Button, Stack } from '@mui/material';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
-export default function EditProfile() {
-	const user = useLoaderData();
+export default function EditPost() {
+	const post = useLoaderData();
 	const navigate = useNavigate();
-	const token = getUserData('token');
-	const userId = getUserData('userId');
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		//Convert FormData to JSON
+		const token = getUserData('token');
+		const postId = window.location.pathname.split('/')[2];
 
+		//Convert FormData to JSON
 		const data = new FormData(event.currentTarget);
 		const formDataObj = {};
 		data.forEach((value, key) => (formDataObj[key] = value));
@@ -21,7 +21,7 @@ export default function EditProfile() {
 		//Fetch Login
 		try {
 			const response = await fetch(
-				`http://localhost:3000/profile/${userId}`,
+				`http://localhost:3000/posts/${postId}`,
 				{
 					method: 'PUT',
 					body: json,
@@ -33,75 +33,58 @@ export default function EditProfile() {
 				}
 			);
 			if (!response.ok) {
-				let invalidDiv = document.getElementById('errorDiv');
+				const invalidDiv = document.getElementById('errorDiv');
 				invalidDiv.innerHTML =
 					'<p>There was an error.  Your request was not processed.  Please try again later. </p>';
 				throw new Error(response.status);
 			}
 
-			navigate(`/profile/${userId}`);
+			navigate(`/post/${postId}`);
 		} catch (error) {
 			console.log('There was a problem with the fetch operation.', error);
 		}
 	};
-
 	return (
 		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
-			<h2 className='pageTitle'>Edit Profile</h2>
+			<h2 className='pageTitle'>Edit Post</h2>
 			<Box
 				onSubmit={handleSubmit}
 				component='form'
-				id='form'
 				sx={{
 					'& .MuiTextField-root': { width: 1 },
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					maxWidth: '90%',
 					m: 'auto',
 					mt: 0.7,
+					maxWidth: '90%',
 				}}
+				id='form'
 				noValidate
 				autoComplete='off'
 			>
 				<TextField
+					required
 					fullWidth
-					label='Name'
+					id='title'
+					label='Title'
 					margin='normal'
+					name='headline'
 					variant='filled'
-					name='fullName'
-					id='fullName'
-					defaultValue={user.fullName}
+					defaultValue={post.headline}
 				></TextField>
 				<TextField
 					variant='filled'
+					required
 					fullWidth
-					id='department'
-					label='Department'
-					margin='normal'
-					name='department'
-					defaultValue={user.department}
-				></TextField>
-				<TextField
-					variant='filled'
-					fullWidth
-					id='location'
-					label='Location'
-					margin='normal'
-					name='location'
-					defaultValue={user.location}
-				></TextField>
-				<TextField
-					variant='filled'
-					fullWidth
-					label='Bio'
-					id='bio'
+					id='body'
+					label='Body'
+					name='content'
 					multiline
-					rows={6}
+					rows={4}
 					margin='normal'
-					name='bio'
-					defaultValue={user.bio}
+					defaultValue={post.content}
 				></TextField>
 				<Stack
 					direction='column'
@@ -109,26 +92,30 @@ export default function EditProfile() {
 					id='buttonGroup'
 					sx={{ width: 0.5, m: 1 }}
 				>
+					{' '}
 					<Button
 						type='submit'
 						variant='contained'
 						color='primary'
 						sx={{ my: 2 }}
+						size='small'
 						id='button'
 					>
 						Submit
 					</Button>
 					<Button
+						size='small'
 						variant='contained'
+						color='error'
+						sx={{ my: 2 }}
 						onClick={() => {
 							navigate(-1);
 						}}
-						color='error'
-						sx={{ my: 2 }}
 						id='button'
 					>
 						Cancel
 					</Button>
+					<div id='errorDiv'></div>
 				</Stack>
 			</Box>
 			<div id='errorDiv'></div>

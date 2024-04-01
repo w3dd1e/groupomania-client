@@ -1,23 +1,31 @@
 import * as React from 'react';
-
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import {
+	Box,
+	BottomNavigation,
+	BottomNavigationAction,
+	Paper,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Paper from '@mui/material/Paper';
 import { NavLink as RouterLink } from 'react-router-dom';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 export default function Navigation() {
+	const isDesktop = useMediaQuery('(min-width: 1024px)');
 	const [value, setValue] = React.useState(0);
 	//const navigate = useNavigate();
 	const ref = React.useRef(null);
 
-	return (
+	return isDesktop ? null : (
 		<Box sx={{ pb: 7 }} ref={ref}>
 			<Paper
-				sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+				sx={{
+					position: 'fixed',
+					bottom: 0,
+					left: 0,
+					right: 0,
+				}}
 				variant='outlined'
 			>
 				<BottomNavigation
