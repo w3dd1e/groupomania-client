@@ -12,6 +12,9 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+// This component is rendered in the Feed. It represents a single post in the list.
+// props.read is used to conditional style the card based on read status returned from the server
+// Posts that habe been read should be rendered with darker background and title colors.
 function PostCard(props) {
 	return (
 		<>

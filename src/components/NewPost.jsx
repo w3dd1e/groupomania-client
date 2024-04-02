@@ -4,6 +4,9 @@ import { Form, redirect } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 import { Container } from '@mui/material';
 
+// TODO : Add image upload functionality to allow users to submit images with posts
+
+//Actions used with React Router to send data to server
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
 	const token = getUserData('token');

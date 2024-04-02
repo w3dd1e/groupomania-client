@@ -4,6 +4,12 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { getUserData } from '../helpers/helpers';
 import PostCard from './PostCard';
 
+//Infinite scroll will fetch 12 posts on page load and then 12 more posts
+// when user scrolls to the bottom
+//To alter amount of posts rendered on page load, update the default index value,
+// the increment value in the setIndex function.
+//Altering the offsetin the fetch URL will change the starting point for the posts.
+//This can render duplicates if the values are not aligned properly.
 export default function Feed() {
 	const [items, setItems] = React.useState([]);
 	const [hasMore, setHasMore] = React.useState(true);

@@ -11,6 +11,7 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { redirect, Form } from 'react-router-dom';
 
+// React Router uses actions when sending data to the server
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
 

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import App from './pages/App';
 import ErrorPage from './pages/ErrorPage';
 import SignIn, { action as loginAction } from './components/SignIn';
@@ -40,6 +41,8 @@ const router = createBrowserRouter([
 
 				children: [
 					{
+						// Pages that are children of this route are not available
+						// unless user is logged in
 						element: <PrivateRoutes />,
 						children: [
 							{ index: true, element: <Feed /> },

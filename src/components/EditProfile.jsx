@@ -3,6 +3,13 @@ import { Box, Container, TextField, Button, Stack } from '@mui/material';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
+// * FUTURE VERSIONS *
+// The handleSubmit function should be handled with an action via React Router
+// This was not updated previous due to useNavigate and redirect issues on submit.
+// Hook such as useNavigate should not be used in actions
+
+// TODO : Add image upload functionality to change profile picture
+
 export default function EditProfile() {
 	const user = useLoaderData();
 	const navigate = useNavigate();

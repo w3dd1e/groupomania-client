@@ -14,6 +14,8 @@ import {
 import { redirect, useLoaderData, Link, Form } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
+// This component renders the details of a single post on it's own page
+
 //Fetch Post
 async function getPost(postId) {
 	const token = getUserData('token');

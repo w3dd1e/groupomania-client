@@ -24,7 +24,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 
 //Logout
 
-//Fetch Profile
+//Fetch Profile Function
 async function getProfile(userId) {
 	const token = getUserData('token');
 
@@ -44,7 +44,7 @@ async function getProfile(userId) {
 	console.log('Data fetched from database!');
 	return response;
 }
-
+//Delete Account Function
 async function deleteAccount(userId) {
 	const token = getUserData('token');
 	const response = await fetch(`http://localhost:3000/profile/${userId}`, {
@@ -68,7 +68,7 @@ async function deleteAccount(userId) {
 	return response;
 }
 
-//Loader funciton for Router
+//Loader funciton for React Router retrieves data from server
 export async function loader({ params }) {
 	const token = sessionStorage.getItem('token');
 
@@ -84,6 +84,7 @@ export async function loader({ params }) {
 		return redirect('/login');
 	}
 }
+// Action used with React Router to handle sending data to server
 export async function action({ params }) {
 	const res = await deleteAccount(params.userId);
 	const data = await res.json();
@@ -93,7 +94,7 @@ export async function action({ params }) {
 	return redirect('/login');
 }
 
-//Create list items for use in the profile
+//Custom styled Material UI componenet for profile list items
 const ProfileItem = styled(ListItem)(() => ({
 	padding: 0,
 	alignItems: 'flex-start',
@@ -251,6 +252,10 @@ export default function Profile() {
 						>
 							Edit Profile
 						</Button>
+						{
+							// The logout button is moved to the menu in TitleBar component
+							// when user is on a destop
+						}
 						{isDesktop ? null : (
 							<Button
 								variant='contained'
