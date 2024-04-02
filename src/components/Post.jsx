@@ -82,8 +82,9 @@ export async function action({ params }) {
 }
 
 export default function Post() {
+	const userId = getUserData('userId');
 	const post = useLoaderData();
-
+	const isLoggedIn = parseInt(userId) === post.user_id;
 	return (
 		<Container component='main' className='mainContainer' sx={{ p: 0 }}>
 			<h2 className='pageTitle'>Post</h2>
@@ -146,59 +147,64 @@ export default function Post() {
 						</CardActions>
 					</Card>
 				</Paper>
-				<Stack
-					direction='column'
-					flex={1}
-					id='bottomStack'
-					sx={{
-						width: 1,
-						m: 1,
-						flex: 1,
-						display: 'flex',
-						alignContent: 'center',
-						alignItems: 'center',
-					}}
-				>
-					<div id='buttonGroup'>
-						<Button
-							component={Link}
-							to='edit'
-							variant='contained'
-							color='primary'
-							sx={{ my: 2 }}
-							size='small'
-							id='button'
-						>
-							Edit Post
-						</Button>
-						<Form
-							id='button'
-							sx={{ width: 1 }}
-							method='post'
-							action='delete'
-							onSubmit={(event) => {
-								if (
-									!confirm(
-										'Please confirm you want to delete this post.'
-									)
-								) {
-									event.preventDefault();
-								}
+				{
+					//Post buttons only render if correct user is logged in
+					!isLoggedIn ? null : (
+						<Stack
+							direction='column'
+							flex={1}
+							id='bottomStack'
+							sx={{
+								width: 1,
+								m: 1,
+								flex: 1,
+								display: 'flex',
+								alignContent: 'center',
+								alignItems: 'center',
 							}}
 						>
-							<Button
-								type='submit'
-								variant='contained'
-								color='error'
-								sx={{ my: 2, width: 1 }}
-								size='small'
-								id='delete'
-							>
-								Delete Post
-							</Button>
-						</Form>
-					</div>
-				</Stack>
+							<div id='buttonGroup'>
+								<Button
+									component={Link}
+									to='edit'
+									variant='contained'
+									color='primary'
+									sx={{ my: 2 }}
+									size='small'
+									id='button'
+								>
+									Edit Post
+								</Button>
+								<Form
+									id='button'
+									sx={{ width: 1 }}
+									method='post'
+									action='delete'
+									onSubmit={(event) => {
+										if (
+											!confirm(
+												'Please confirm you want to delete this post.'
+											)
+										) {
+											event.preventDefault();
+										}
+									}}
+								>
+									<Button
+										type='submit'
+										variant='contained'
+										color='error'
+										sx={{ my: 2, width: 1 }}
+										size='small'
+										id='delete'
+									>
+										Delete Post
+									</Button>
+								</Form>
+							</div>
+						</Stack>
+					)
+				}
 			</Stack>
 		</Container>
 	);
