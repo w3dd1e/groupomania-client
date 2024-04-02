@@ -101,7 +101,7 @@ export default function Post() {
 				id='post'
 			>
 				<Paper elevation={1} sx={{ width: 1 }}>
-					<Card sx={{ maxWidth: 345 }}>
+					<Card>
 						<CardHeader
 							avatar={
 								<Avatar
@@ -116,6 +116,7 @@ export default function Post() {
 								fontWeight: 700,
 								id: 'postTitle',
 							}}
+							sx={{ width: 1 }}
 						/>
 
 						<CardContent>
