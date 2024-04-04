@@ -19,9 +19,6 @@ export default function EditPost() {
 
 		//Convert FormData to JSON
 		const data = new FormData(event.currentTarget);
-		const formDataObj = {};
-		data.forEach((value, key) => (formDataObj[key] = value));
-		const json = JSON.stringify(formDataObj);
 
 		//Fetch Login
 		try {
@@ -29,10 +26,9 @@ export default function EditPost() {
 				`http://localhost:3000/posts/${postId}`,
 				{
 					method: 'PUT',
-					body: json,
+					body: data,
 					headers: {
 						Accept: 'application/json',
-						'Content-Type': 'application/json',
 						Authorization: 'Bearer ' + token,
 					},
 				}
@@ -91,6 +87,14 @@ export default function EditPost() {
 					margin='normal'
 					defaultValue={post.content}
 				></TextField>
+				<TextField
+					variant='filled'
+					fullWidth
+					id='image'
+					name='image'
+					type='file'
+					margin='normal'
+				/>
 				<Stack
 					direction='column'
 					flex={1}
