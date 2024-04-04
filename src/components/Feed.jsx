@@ -70,6 +70,7 @@ export default function Feed() {
 			post_id={post.post_id}
 			headline={post.headline}
 			content={post.content}
+			imageUrl={post.imageUrl}
 			username={post.user.username}
 			profileImage={post.user.profileImage}
 			createdAt={post.createdAt}

@@ -10,6 +10,7 @@ import {
 	CardHeader,
 	CardActions,
 	CardContent,
+	CardMedia,
 } from '@mui/material';
 import { redirect, useLoaderData, Link, Form } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
@@ -106,7 +107,7 @@ export default function Post() {
 							avatar={
 								<Avatar
 									alt={post.username}
-									src={post.profileImage}
+									src={post.user.profileImage}
 								></Avatar>
 							}
 							title={post.headline}
@@ -118,6 +119,20 @@ export default function Post() {
 							}}
 							sx={{ width: 1 }}
 						/>
+						{console.log(post)}
+
+						{post.imageUrl && (
+							<CardMedia
+								component='img'
+								sx={{
+									height: 140,
+									aspectRatio: '1/1',
+									m: 'auto',
+									objectFit: 'contain',
+								}}
+								image={post.imageUrl}
+							/>
+						)}
 
 						<CardContent>
 							<Typography

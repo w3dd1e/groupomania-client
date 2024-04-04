@@ -9,6 +9,8 @@ import {
 	CardActions,
 	CardContent,
 	Button,
+	CardMedia,
+	Stack,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -25,40 +27,68 @@ function PostCard(props) {
 			>
 				<Card
 					elevation={props.elevation}
-					sx={{ width: '100%', p: 2.5, py: 1.5 }}
+					sx={{
+						width: '100%',
+						p: 2.5,
+						pt: 1.5,
+						pb: 1,
+						display: 'flex',
+						aligntItems: 'stretch',
+						gap: 1,
+						maxHeight: '150px',
+						flexWrap: 'wrap',
+					}}
 				>
-					<CardHeader
-						title={
-							<Link
-								className={props.read}
-								to={`/post/${props.post_id}`}
-								id='cardTitle'
+					<Stack sx={{ flex: 1, overflow: 'hidden' }}>
+						<CardHeader
+							title={
+								<Link
+									className={props.read}
+									to={`/post/${props.post_id}`}
+									id='cardTitle'
+								>
+									{props.headline}
+								</Link>
+							}
+							titleTypographyProps={{
+								fontSize: 18,
+								width: 1,
+							}}
+							sx={{ p: 0, width: 1, wordWrap: 'anywhere' }}
+						></CardHeader>
+						<CardContent sx={{ p: 0 }}>
+							<Typography
+								noWrap
+								variant='body1'
+								color='text.secondary'
+								id='cardBody'
+								sx={{
+									textOverflow: 'ellipsis',
+								}}
 							>
-								{props.headline}
-							</Link>
-						}
-						titleTypographyProps={{
-							fontSize: 18,
-							width: 1,
-						}}
-						sx={{ p: 0, width: 1, wordWrap: 'anywhere' }}
-					></CardHeader>
-					<CardContent sx={{ mt: 0.5, mb: 2.5, p: 0 }}>
-						<Typography
-							noWrap
-							variant='body1'
-							color='text.secondary'
-							id='cardBody'
-						>
-							{props.content}
-						</Typography>
-					</CardContent>
+								{props.content}
+							</Typography>
+						</CardContent>
+					</Stack>
+					{props.imageUrl && (
+						<CardMedia
+							component='img'
+							sx={{
+								width: '50px',
+								height: '75px',
+								ml: 'auto',
+								my: 'auto',
+							}}
+							image={props.imageUrl}
+						/>
+					)}{' '}
 					<CardActions
 						sx={{
 							p: 0,
 							display: 'flex',
 							justifyContent: 'space-between',
 							alignItems: 'flex-end',
+							width: '100%',
 						}}
 					>
 						<Button
@@ -90,6 +120,7 @@ function PostCard(props) {
 									lt={props.username}
 									src={props.profileImage}
 								/>
+								{console.log(props)}
 							</ListItemAvatar>
 							<Typography fontSize='12px'>
 								{props.username}
