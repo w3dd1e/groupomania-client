@@ -165,8 +165,8 @@ export default function Profile() {
 						>
 							<Avatar
 								variant='rounded'
-								alt='Ducky'
-								src='../../src/assets/Ducky.jpeg'
+								alt='profile image'
+								src={user.profileImage}
 								sx={{
 									height: '100%',
 									objectFit: 'cover',
@@ -183,7 +183,7 @@ export default function Profile() {
 									},
 								}}
 							/>
-
+							{console.log(user)}
 							<List
 								sx={{
 									display: 'flex',
