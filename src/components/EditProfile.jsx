@@ -21,9 +21,6 @@ export default function EditProfile() {
 		//Convert FormData to JSON
 
 		const data = new FormData(event.currentTarget);
-		const formDataObj = {};
-		data.forEach((value, key) => (formDataObj[key] = value));
-		const json = JSON.stringify(formDataObj);
 
 		//Fetch Login
 		try {
@@ -31,10 +28,9 @@ export default function EditProfile() {
 				`http://localhost:3000/profile/${userId}`,
 				{
 					method: 'PUT',
-					body: json,
+					body: data,
 					headers: {
 						Accept: 'application/json',
-						'Content-Type': 'application/json',
 						Authorization: 'Bearer ' + token,
 					},
 				}
@@ -110,6 +106,14 @@ export default function EditProfile() {
 					name='bio'
 					defaultValue={user.bio}
 				></TextField>
+				<TextField
+					variant='filled'
+					fullWidth
+					id='image'
+					name='image'
+					type='file'
+					margin='normal'
+				/>
 				<Stack
 					direction='column'
 					flex={1}
