@@ -71,7 +71,7 @@ button:focus-visible {
 	padding-bottom: 0.5rem;
 	margin: 0;
 	position: sticky;
-	top: 55px;
+	top: 50px;
 	z-index: 1;
 	background-color: #121212;
 }
@@ -184,10 +184,7 @@ button:focus-visible {
 	#postBody {
 		font-size: 1.25rem;
 	}
-	#cardTitle,
-	#cardBody {
-		font-size: 1.5rem;
-	}
+
 	#feed,
 	#form,
 	#profile,
