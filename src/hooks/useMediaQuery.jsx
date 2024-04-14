@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+// This custom hook uses the `window.matchMedia()` API to detect
+// window size and orientation changes and update the `matches` state accordingly.
 export default function useMediaQuery(query) {
 	const [matches, setMatches] = React.useState(() => {
 		// Check initial match on component mount

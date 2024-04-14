@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Form, redirect } from 'react-router-dom';
+
+// React Router uses actions to send info to the server
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
 	//Convert FormData to JSON

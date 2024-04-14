@@ -24,7 +24,7 @@ import useMediaQuery from '../hooks/useMediaQuery';
 
 //Logout
 
-//Fetch Profile
+//Fetch Profile Function
 async function getProfile(userId) {
 	const token = getUserData('token');
 
@@ -44,7 +44,7 @@ async function getProfile(userId) {
 	console.log('Data fetched from database!');
 	return response;
 }
-
+//Delete Account Function
 async function deleteAccount(userId) {
 	const token = getUserData('token');
 	const response = await fetch(`http://localhost:3000/profile/${userId}`, {
@@ -68,7 +68,7 @@ async function deleteAccount(userId) {
 	return response;
 }
 
-//Loader funciton for Router
+//Loader funciton for React Router retrieves data from server
 export async function loader({ params }) {
 	const token = sessionStorage.getItem('token');
 
@@ -84,6 +84,7 @@ export async function loader({ params }) {
 		return redirect('/login');
 	}
 }
+// Action used with React Router to handle sending data to server
 export async function action({ params }) {
 	const res = await deleteAccount(params.userId);
 	const data = await res.json();
@@ -93,16 +94,19 @@ export async function action({ params }) {
 	return redirect('/login');
 }
 
-//Create list items for use in the profile
+//Custom styled Material UI componenet for profile list items
 const ProfileItem = styled(ListItem)(() => ({
 	padding: 0,
 	alignItems: 'flex-start',
 }));
 
 export default function Profile() {
+	const userId = getUserData('userId');
 	const isDesktop = useMediaQuery('(min-width: 1024px)');
 	const user = useLoaderData();
 	const navigate = useNavigate();
+
+	const isLoggedIn = userId === location.pathname.split('/')[2];
 
 	const logout = () => {
 		sessionStorage.clear();
@@ -161,8 +165,8 @@ export default function Profile() {
 						>
 							<Avatar
 								variant='rounded'
-								alt='Ducky'
-								src='../../src/assets/Ducky.jpeg'
+								alt='profile image'
+								src={user.profileImage}
 								sx={{
 									height: '100%',
 									objectFit: 'cover',
@@ -179,7 +183,7 @@ export default function Profile() {
 									},
 								}}
 							/>
-
+							{console.log(user)}
 							<List
 								sx={{
 									display: 'flex',
@@ -228,70 +232,79 @@ export default function Profile() {
 					</Grid>
 				</Paper>
 
-				<Stack
-					direction='column'
-					sx={{
-						width: 1,
-						m: 1,
-						flex: 1,
-						display: 'flex',
-						alignContent: 'center',
-						alignItems: 'center',
-					}}
-					id='bottomStack'
-				>
-					<div id='buttonGroup'>
-						<Button
-							component={Link}
-							to='edit'
-							variant='contained'
-							color='primary'
-							sx={{ my: 2 }}
-							id='button'
-						>
-							Edit Profile
-						</Button>
-						{isDesktop ? null : (
-							<Button
-								variant='contained'
-								sx={{ my: 2 }}
-								onClick={logout}
-								id='button'
-							>
-								Logout
-							</Button>
-						)}
-						<Form
-							sx={{ width: 1 }}
-							method='post'
-							action='delete'
-							id='buttonForm'
-							onSubmit={(event) => {
-								if (
-									!confirm(
-										'Please confirm you want to delete this account.'
-									)
-								) {
-									event.preventDefault();
-								}
+				{
+					//Profile buttons only render if correct user is logged in
+					!isLoggedIn ? null : (
+						<Stack
+							direction='column'
+							sx={{
+								width: 1,
+								m: 1,
+								flex: 1,
+								display: 'flex',
+								alignContent: 'center',
+								alignItems: 'center',
 							}}
+							id='bottomStack'
 						>
-							<Button
-								type='submit'
-								variant='contained'
-								color='error'
-								id='delete'
-								sx={{
-									my: 2,
-									width: '100%',
-									px: 1,
-								}}
-							>
-								Delete Account
-							</Button>
-						</Form>
-					</div>
-				</Stack>
+							<div id='buttonGroup'>
+								<Button
+									component={Link}
+									to='edit'
+									variant='contained'
+									color='primary'
+									sx={{ my: 2 }}
+									id='button'
+								>
+									Edit Profile
+								</Button>
+								{
+									// The logout button is moved to the menu in TitleBar component
+									// when user is on a destop
+								}
+								{isDesktop ? null : (
+									<Button
+										variant='contained'
+										sx={{ my: 2 }}
+										onClick={logout}
+										id='button'
+									>
+										Logout
+									</Button>
+								)}
+								<Form
+									sx={{ width: 1 }}
+									method='post'
+									action='delete'
+									id='buttonForm'
+									onSubmit={(event) => {
+										if (
+											!confirm(
+												'Please confirm you want to delete this account.'
+											)
+										) {
+											event.preventDefault();
+										}
+									}}
+								>
+									<Button
+										type='submit'
+										variant='contained'
+										color='error'
+										id='delete'
+										sx={{
+											my: 2,
+											width: '100%',
+											px: 1,
+										}}
+									>
+										Delete Account
+									</Button>
+								</Form>
+							</div>
+						</Stack>
+					)
+				}
 			</Stack>
 		</Container>
 	);

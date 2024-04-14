@@ -16,6 +16,7 @@ export default function MenuAppBar() {
 	const isDesktop = useMediaQuery('(min-width: 1024px)');
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
+
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -70,6 +71,11 @@ export default function MenuAppBar() {
 							</svg>
 						</SvgIcon>
 					</div>
+					{/*
+					 * The Menu in the Title Bar only rendered on desktops
+					 * I opted for larger navigation when using touch screens
+					 * to improve usability.
+					 */}
 					{!isDesktop ? null : (
 						<div>
 							<Button

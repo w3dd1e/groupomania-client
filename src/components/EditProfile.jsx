@@ -3,6 +3,13 @@ import { Box, Container, TextField, Button, Stack } from '@mui/material';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 
+// * FUTURE VERSIONS *
+// The handleSubmit function should be handled with an action via React Router
+// This was not updated previous due to useNavigate and redirect issues on submit.
+// Hook such as useNavigate should not be used in actions
+
+// TODO : Add image upload functionality to change profile picture
+
 export default function EditProfile() {
 	const user = useLoaderData();
 	const navigate = useNavigate();
@@ -14,9 +21,6 @@ export default function EditProfile() {
 		//Convert FormData to JSON
 
 		const data = new FormData(event.currentTarget);
-		const formDataObj = {};
-		data.forEach((value, key) => (formDataObj[key] = value));
-		const json = JSON.stringify(formDataObj);
 
 		//Fetch Login
 		try {
@@ -24,10 +28,9 @@ export default function EditProfile() {
 				`http://localhost:3000/profile/${userId}`,
 				{
 					method: 'PUT',
-					body: json,
+					body: data,
 					headers: {
 						Accept: 'application/json',
-						'Content-Type': 'application/json',
 						Authorization: 'Bearer ' + token,
 					},
 				}
@@ -103,6 +106,14 @@ export default function EditProfile() {
 					name='bio'
 					defaultValue={user.bio}
 				></TextField>
+				<TextField
+					variant='filled'
+					fullWidth
+					id='image'
+					name='image'
+					type='file'
+					margin='normal'
+				/>
 				<Stack
 					direction='column'
 					flex={1}

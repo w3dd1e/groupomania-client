@@ -11,6 +11,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { NavLink as RouterLink } from 'react-router-dom';
 import useMediaQuery from '../hooks/useMediaQuery';
 
+// Navigation does not render in desktop sized browsers.
+// Functionality is moved to menu in TitleBar
 export default function Navigation() {
 	const isDesktop = useMediaQuery('(min-width: 1024px)');
 	const [value, setValue] = React.useState(0);

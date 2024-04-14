@@ -4,6 +4,9 @@ import { Form, redirect } from 'react-router-dom';
 import { getUserData } from '../helpers/helpers';
 import { Container } from '@mui/material';
 
+// TODO : Add image upload functionality to allow users to submit images with posts
+
+//Actions used with React Router to send data to server
 export const action = async () => {
 	const data = await new FormData(document.querySelector('form'));
 	const token = getUserData('token');
@@ -12,16 +15,18 @@ export const action = async () => {
 	//Convert FormData to JSON
 	const formDataObj = {};
 	data.forEach((value, key) => (formDataObj[key] = value));
-	const json = JSON.stringify(formDataObj);
+	console.log(data.title);
+	//const json = JSON.stringify(formDataObj);
+
 	//Fetch Login
 
 	try {
 		const response = await fetch(`http://localhost:3000/posts/`, {
 			method: 'POST',
-			body: json,
+			body: data,
 			headers: {
 				Accept: 'application/json',
-				'Content-Type': 'application/json',
+
 				Authorization: 'Bearer ' + token,
 			},
 		});
@@ -72,7 +77,6 @@ export default function NewPost() {
 				></TextField>
 				<TextField
 					variant='filled'
-					required
 					fullWidth
 					id='body'
 					label='Body'
@@ -81,6 +85,14 @@ export default function NewPost() {
 					rows={6}
 					margin='normal'
 				></TextField>
+				<TextField
+					variant='filled'
+					fullWidth
+					id='image'
+					name='image'
+					type='file'
+					margin='normal'
+				/>
 				<Stack
 					direction='column'
 					id='buttonGroup'
@@ -107,6 +119,7 @@ export default function NewPost() {
 					>
 						Reset
 					</Button>
+
 					<div id='errorDiv'></div>
 				</Stack>
 			</Box>
