@@ -1,3 +1,5 @@
+This is a Reddit-style aggregation/social platform. The back-end repo can be found [here](https://github.com/w3dd1e/groupomania-server). 
+
 # Server Prerequisites
 
 You will need to have Node and npm installed locally on your machine.
